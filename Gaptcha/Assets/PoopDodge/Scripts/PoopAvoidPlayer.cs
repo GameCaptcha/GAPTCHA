@@ -4,10 +4,10 @@ public class PoopAvoidPlayer : MonoBehaviour
 {
     [SerializeField] PoopAvoidManager poopAvoidManager;
 
-    [Header("ÀÌµ¿")]
+    [Header("ì´ë™")]
     public float moveSpeed = 6f;
 
-    [Header("ÇÃ·¹ÀÌ ¹üÀ§(¿ùµå ÁÂÇ¥)"), SerializeField]
+    [Header("í”Œë ˆì´ ë²”ìœ„(ì›”ë“œ ì¢Œí‘œ)"), SerializeField]
     Vector2 minBound;
 
     [SerializeField]
@@ -16,7 +16,7 @@ public class PoopAvoidPlayer : MonoBehaviour
     [SerializeField]
     SpriteRenderer spriteRender;
 
-    bool isInverted = false; // ¡ç ¹æÇâ ¹İÀü ¿©ºÎ¸¦ ÀúÀå
+    bool isInverted = false; // â† ë°©í–¥ ë°˜ì „ ì—¬ë¶€ë¥¼ ì €ì¥
 
 
     void Awake()
@@ -27,9 +27,19 @@ public class PoopAvoidPlayer : MonoBehaviour
 
     void Update()
     {
-        float x = Input.GetAxisRaw("Horizontal");
+        float x = 0;
+        if (GlobalGameManager.Instance.actionIndex == 0)
+        {
+            x = 0;
+        } else if (GlobalGameManager.Instance.actionIndex == 1)
+        {
+            x = -1;
+        } else if (GlobalGameManager.Instance.actionIndex == 2)
+        {
+            x = 1;
+        }
 
-        // GameModifier¿¡¼­ ¹æÇâ ¹İÀüÀÌ ÄÑÁö¸é ÀÔ·ÂÀ» ¹İ´ë·Î
+        // GameModifierì—ì„œ ë°©í–¥ ë°˜ì „ì´ ì¼œì§€ë©´ ì…ë ¥ì„ ë°˜ëŒ€ë¡œ
         if (isInverted)
         {
             x *= -1;
@@ -38,10 +48,10 @@ public class PoopAvoidPlayer : MonoBehaviour
         Vector3 dir = new Vector3(x, 0f, 0f).normalized;
 
 
-        // ÀÌµ¿
+        // ì´ë™
         transform.position += dir * moveSpeed * Time.deltaTime;
 
-        // È­¸é ¹ÛÀ¸·Î ³ª°¡Áö ¾Ê°Ô À§Ä¡ Á¦ÇÑ
+        // í™”ë©´ ë°–ìœ¼ë¡œ ë‚˜ê°€ì§€ ì•Šê²Œ ìœ„ì¹˜ ì œí•œ
         Vector3 p = transform.position;
         float halfW = spriteRender.bounds.extents.x;
         float halfH = spriteRender.bounds.extents.y;

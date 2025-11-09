@@ -1,3 +1,4 @@
+using Unity.MLAgents;
 using UnityEngine;
 
 public class GameModifier : MonoBehaviour
@@ -7,31 +8,29 @@ public class GameModifier : MonoBehaviour
     public Camera mainCamera;
     public PoopAvoidPlayer playerController;
 
-    // 랜덤으로 선택될 변형 타입
     enum Mode { ColorChange, SpeedChange, CameraFlip, ControlInvert }
     Mode activeMode;
 
-    // 타이머
     float timer = 0f;
     float nextActionTime = 0f;
 
-    // 제어 반전 관련
     bool isControlInverted = false;
     float invertEndTime = 0f;
 
     void Start()
     {
-        // 게임 시작 시 랜덤으로 모드 선택
+        enabled = false;
+        return;
         activeMode = (Mode)Random.Range(0, 4);
 
-        Debug.Log($"[GameModifier] Selected Mode: {activeMode}");
+        if (VisualAgent.DEBUG_PRINT)
+            Debug.Log($"[GameModifier] Selected Mode: {activeMode}");
     }
 
     void Update()
     {
         float t = Time.time;
 
-        // 현재 모드에 따라 작동 주기 결정
         switch (activeMode)
         {
             case Mode.ColorChange:
@@ -68,15 +67,12 @@ public class GameModifier : MonoBehaviour
                 break;
         }
 
-        // 방향 반전 종료 처리
         if (isControlInverted && Time.time > invertEndTime)
         {
             isControlInverted = false;
             playerController.SetInverted(false);
         }
     }
-
-    // === 기능별 메서드 ===
 
     void RandomizeColors()
     {

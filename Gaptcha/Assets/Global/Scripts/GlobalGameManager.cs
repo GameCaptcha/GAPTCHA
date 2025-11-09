@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GlobalGameManager : MonoBehaviour
 {
     private static GlobalGameManager instance = null;
+    
+    [FormerlySerializedAs("ActionIndex")] public int actionIndex = 0;
 
     void Awake()
     {
@@ -33,20 +36,20 @@ public class GlobalGameManager : MonoBehaviour
     }
 
     [SerializeField] Camera mainCamera;
+    [SerializeField] VisualAgent visualAgent;
 
 
     [SerializeField] List<GameManager> gameManagerList = new List<GameManager>();
     GameManager nowGameManager = null;
 
     float elapsedTime;
-    float elapsedTime_Total;
     float gameChangeDelay = 8.0f;
-    int gameChangedCount = 0;
 
     void Init()
     {
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
+            Debug.Log("Init(): gameManagerList[i]=" + gameManagerList[i]);
             gameManagerList[i].gameObject.SetActive(false);
         }
 
@@ -55,31 +58,29 @@ public class GlobalGameManager : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Start");
         GameStart();
     }
 
     private void Update()
     {
         elapsedTime += Time.smoothDeltaTime;
-        elapsedTime_Total += Time.smoothDeltaTime;
-        GlobalDatas.SetAliveTime(elapsedTime_Total);
 
-        if (elapsedTime >= gameChangeDelay)
-        {
-            GameChange();
-            gameChangedCount += 1;
-            elapsedTime -= gameChangeDelay;
-            GameStart();
-
-            GlobalDatas.SetScore(gameChangedCount);
-        }
+        // if(elapsedTime >= gameChangeDelay)
+        // {
+        //     GameChange();
+        //     elapsedTime -= gameChangeDelay;
+        //     GameStart();
+        // }
 
     }
 
     public void GameChange()
     {
+        // 무한 재귀 안 되도록 시간 최적화 요청
         int num = UnityEngine.Random.Range(0, gameManagerList.Count);
-        Debug.Log(num);
+        if (VisualAgent.DEBUG_PRINT)
+            Debug.Log(num);
 
         if(nowGameManager == null)
         {
@@ -87,14 +88,14 @@ public class GlobalGameManager : MonoBehaviour
         }
         else
         {
-            if(nowGameManager == gameManagerList[num])
-            {
-                GameChange();
-            }
-            else
-            {
+            // if(nowGameManager == gameManagerList[num])
+            // {
+            //     GameChange();
+            // }
+            // else
+            // {
                 nowGameManager = gameManagerList[num];
-            }
+            // }
         }
     }
 
@@ -108,19 +109,23 @@ public class GlobalGameManager : MonoBehaviour
 
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
+            Debug.Log("GameStart(): for: gameManagerList[i]=" + gameManagerList[i]);
             gameManagerList[i].gameObject.SetActive(false);
         }
+        Debug.Log("GameStart(): nowGameManager=" + nowGameManager);
         nowGameManager.gameObject.SetActive(true);
 
         nowGameManager.Refresh();
         nowGameManager.GameStart();
     }
 
+    //public bool over = false;
     public void GameOver()
     {
-        Time.timeScale = 0;
-        Debug.Log(GlobalDatas.GetScore());
-        Debug.Log(GlobalDatas.GetAliveTime());
+        if (VisualAgent.DEBUG_PRINT)
+            Debug.Log("GameOver()");
+        // Time.timeScale = 0;
+        visualAgent.OnEndEpisode();
     }
 
     public GameKind GetRandomGameKind()
@@ -133,6 +138,19 @@ public class GlobalGameManager : MonoBehaviour
     public GameKind GetNowGameKind()
     {
         return nowGameManager.GetGameKind();
+    }
+
+    public void PerformOnEpisodeBegin()
+    {
+        // Init();
+        if (nowGameManager)
+        {
+            nowGameManager.Refresh();
+        }
+        else
+        {
+            Debug.LogError("PerformOnEpisodeBegin(): not exist nowGameManager");
+        }
     }
 
 }

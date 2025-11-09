@@ -16,6 +16,7 @@ public class PoopAvoidManager : GameManager
     }
     public override void Refresh()
     {
+        spawner.enabled = true;
         spawner.Refresh();
 
         surviveTime = 0f;
@@ -26,7 +27,7 @@ public class PoopAvoidManager : GameManager
             gameOverPanel.SetActive(false);
         }
     }
-
+    
     public override void GameStart()
     {
 
