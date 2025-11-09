@@ -5,35 +5,7 @@ using UnityEngine.Serialization;
 
 public class GlobalGameManager : MonoBehaviour
 {
-    private static GlobalGameManager instance = null;
-    
     [FormerlySerializedAs("ActionIndex")] public int actionIndex = 0;
-
-    void Awake()
-    {
-        if (null == instance)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
-        Init();
-    }
-    public static GlobalGameManager Instance
-    {
-        get
-        {
-            if (null == instance)
-            {
-                return null;
-            }
-            return instance;
-        }
-    }
 
     [SerializeField] Camera mainCamera;
     [SerializeField] VisualAgent visualAgent;
@@ -42,14 +14,13 @@ public class GlobalGameManager : MonoBehaviour
     [SerializeField] List<GameManager> gameManagerList = new List<GameManager>();
     GameManager nowGameManager = null;
 
-    float elapsedTime;
     float gameChangeDelay = 8.0f;
 
     void Init()
     {
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
-            Debug.Log("Init(): gameManagerList[i]=" + gameManagerList[i]);
+            GlobalDatas.DebugLog("Init(): gameManagerList[i]=" + gameManagerList[i]);
             gameManagerList[i].gameObject.SetActive(false);
         }
 
@@ -58,29 +29,15 @@ public class GlobalGameManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Start");
+        GlobalDatas.DebugLog("Start");
         GameStart();
-    }
-
-    private void Update()
-    {
-        elapsedTime += Time.smoothDeltaTime;
-
-        // if(elapsedTime >= gameChangeDelay)
-        // {
-        //     GameChange();
-        //     elapsedTime -= gameChangeDelay;
-        //     GameStart();
-        // }
-
     }
 
     public void GameChange()
     {
         // 무한 재귀 안 되도록 시간 최적화 요청
         int num = UnityEngine.Random.Range(0, gameManagerList.Count);
-        if (VisualAgent.DEBUG_PRINT)
-            Debug.Log(num);
+        GlobalDatas.DebugLog(num);
 
         if(nowGameManager == null)
         {
@@ -103,16 +60,16 @@ public class GlobalGameManager : MonoBehaviour
     {
         if(nowGameManager == null)
         {
-            Debug.LogError("not exist Game manager");
+            GlobalDatas.DebugLogError("not exist Game manager");
             return;
         }
 
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
-            Debug.Log("GameStart(): for: gameManagerList[i]=" + gameManagerList[i]);
+            GlobalDatas.DebugLog("GameStart(): for: gameManagerList[i]=" + gameManagerList[i]);
             gameManagerList[i].gameObject.SetActive(false);
         }
-        Debug.Log("GameStart(): nowGameManager=" + nowGameManager);
+        GlobalDatas.DebugLog("GameStart(): nowGameManager=" + nowGameManager);
         nowGameManager.gameObject.SetActive(true);
 
         nowGameManager.Refresh();
@@ -122,9 +79,8 @@ public class GlobalGameManager : MonoBehaviour
     //public bool over = false;
     public void GameOver()
     {
-        if (VisualAgent.DEBUG_PRINT)
-            Debug.Log("GameOver()");
-        // Time.timeScale = 0;
+        GlobalDatas.DebugLog("GameOver()");
+
         visualAgent.OnEndEpisode();
     }
 
@@ -149,7 +105,7 @@ public class GlobalGameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("PerformOnEpisodeBegin(): not exist nowGameManager");
+            GlobalDatas.DebugLogError("PerformOnEpisodeBegin(): not exist nowGameManager");
         }
     }
 

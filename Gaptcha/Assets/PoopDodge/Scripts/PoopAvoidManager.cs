@@ -62,7 +62,6 @@ public class PoopAvoidManager : GameManager
             gameOverPanel.SetActive(true);
         }
 
-        GlobalGameManager.Instance.GameOver();
     }
 
     public void Restart()

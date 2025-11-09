@@ -23,8 +23,7 @@ public class GameModifier : MonoBehaviour
         return;
         activeMode = (Mode)Random.Range(0, 4);
 
-        if (VisualAgent.DEBUG_PRINT)
-            Debug.Log($"[GameModifier] Selected Mode: {activeMode}");
+        GlobalDatas.DebugLog($"[GameModifier] Selected Mode: {activeMode}");
     }
 
     void Update()

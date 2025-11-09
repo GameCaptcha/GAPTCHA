@@ -9,7 +9,8 @@ public class FlappyBirdPlayer : MonoBehaviour
     private bool _jumpPressed;
     
     [SerializeField] Rigidbody2D myRigidbody;
-    
+    [SerializeField] GlobalGameManager globalGameManager;
+
     void Start() 
     {
         myRigidbody = GetComponent<Rigidbody2D>();
@@ -47,6 +48,6 @@ public class FlappyBirdPlayer : MonoBehaviour
         Debug.Log("GameOver");
         _isDie = true;
 
-        GlobalGameManager.Instance.GameOver();
-    } // 충돌 시 게임 정지 
+        globalGameManager.GameOver();
+    } 
 }

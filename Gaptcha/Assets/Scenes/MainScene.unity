@@ -616,6 +616,10 @@ PrefabInstance:
       propertyPath: poopAvoidManager
       value: 
       objectReference: {fileID: 731646732}
+    - target: {fileID: 3645796885679507408, guid: a3b7e1b60dd195946aae17b0443cf0af, type: 3}
+      propertyPath: globalGameManager
+      value: 
+      objectReference: {fileID: 2087690306}
     - target: {fileID: 4497879681332772508, guid: a3b7e1b60dd195946aae17b0443cf0af, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -1046,7 +1050,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 619394802}
   - {fileID: 429885340}
   - {fileID: 1320702099}
   - {fileID: 797135655}
@@ -1136,7 +1139,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 599043885}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &668846321
 GameObject:
@@ -1334,6 +1337,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  globalGameManager: {fileID: 2087690306}
   forceMultiplier: 10
 --- !u!114 &797135657
 MonoBehaviour:
@@ -1853,7 +1857,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfedd42ba83914b5c817ae2c3b27393f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myRigidbody: {fileID: 0}
+  myRigidbody: {fileID: 1832523144}
+  globalGameManager: {fileID: 2087690306}
 --- !u!61 &1832523143
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1974,6 +1979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64c94d83dd5f7848b39c73773c5c116, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  globalGameManager: {fileID: 2087690306}
 --- !u!61 &1873222749
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2341,5 +2347,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 619394802}
   - {fileID: 599043885}
   - {fileID: 1832304825}

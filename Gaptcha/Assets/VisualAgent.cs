@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 
 public class VisualAgent : Agent
 {
-    public static bool DEBUG_PRINT = true;
+    [SerializeField] GlobalGameManager globalGameManager;
 
     bool episodeEnd = false;
     
@@ -18,9 +18,8 @@ public class VisualAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        if (DEBUG_PRINT)
-            Debug.Log("Agent.OnEpisodeBegin()");
-        GlobalGameManager.Instance.PerformOnEpisodeBegin();
+        GlobalDatas.DebugLog("Agent.OnEpisodeBegin()");
+        globalGameManager.PerformOnEpisodeBegin();
     }
     
     public override void CollectObservations(VectorSensor sensor)
@@ -48,14 +47,13 @@ public class VisualAgent : Agent
         if (true)
         {
             // Debug.Log("Agent.OnActionReceived(): discreteActions[0]=" + discreteActions[0]);
-            GlobalGameManager.Instance.actionIndex = discreteActions[0];
+            globalGameManager.actionIndex = discreteActions[0];
         }
 
         if (episodeEnd)
         {
             episodeEnd = false;
-            if (DEBUG_PRINT)
-                Debug.Log("Agent.OnActionReceived(): EndEpisode");
+            GlobalDatas.DebugLog("Agent.OnActionReceived(): EndEpisode");
             SetReward(-1f);
             EndEpisode();
         }
@@ -88,7 +86,7 @@ public class VisualAgent : Agent
     
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-         Debug.Log("Agent.Heuristic()");
+        GlobalDatas.DebugLog("Agent.Heuristic()");
         // var continuousActionsOut = actionsOut.ContinuousActions;
         var discreteActionsOut = actionsOut.DiscreteActions;
         int index = 0;

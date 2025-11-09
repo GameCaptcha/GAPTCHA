@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] GlobalGameManager globalGameManager;
+
     float speed = 5.5f;
 
 
@@ -20,7 +22,7 @@ public class Player : MonoBehaviour
         if (collision.tag == "Bullet")
         {
             Debug.Log("Hit bullet");
-            GlobalGameManager.Instance.GameOver();
+            globalGameManager.GameOver();
         }
     }
 
