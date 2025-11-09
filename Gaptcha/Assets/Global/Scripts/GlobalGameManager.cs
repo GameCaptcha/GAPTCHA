@@ -16,7 +16,7 @@ public class GlobalGameManager : MonoBehaviour
 
     float gameChangeDelay = 8.0f;
 
-    void Init()
+    void Awake()
     {
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
@@ -35,24 +35,25 @@ public class GlobalGameManager : MonoBehaviour
 
     public void GameChange()
     {
-        // 무한 재귀 안 되도록 시간 최적화 요청
         int num = UnityEngine.Random.Range(0, gameManagerList.Count);
         GlobalDatas.DebugLog(num);
 
-        if(nowGameManager == null)
+        if (nowGameManager == null)
         {
             nowGameManager = gameManagerList[num];
         }
         else
         {
-            // if(nowGameManager == gameManagerList[num])
-            // {
-            //     GameChange();
-            // }
-            // else
-            // {
+            if (nowGameManager == gameManagerList[num])
+            {
+                if (gameManagerList.Count <= 1)
+                    return;
+                GameChange();
+            }
+            else
+            {
                 nowGameManager = gameManagerList[num];
-            // }
+            }
         }
     }
 
@@ -73,10 +74,8 @@ public class GlobalGameManager : MonoBehaviour
         nowGameManager.gameObject.SetActive(true);
 
         nowGameManager.Refresh();
-        nowGameManager.GameStart();
     }
 
-    //public bool over = false;
     public void GameOver()
     {
         GlobalDatas.DebugLog("GameOver()");

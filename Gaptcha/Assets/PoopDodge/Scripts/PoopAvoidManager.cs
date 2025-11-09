@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class PoopAvoidManager : GameManager
 {
+    [SerializeField] GlobalGameManager globalGameManager;
     public PoopSpawner spawner;
     public Text timeText;
-    public GameObject gameOverPanel;
 
     float surviveTime;
     bool isGameOver;
@@ -21,16 +21,6 @@ public class PoopAvoidManager : GameManager
 
         surviveTime = 0f;
         isGameOver = false;
-
-        if (gameOverPanel)
-        {
-            gameOverPanel.SetActive(false);
-        }
-    }
-    
-    public override void GameStart()
-    {
-
     }
 
     void Update()
@@ -57,17 +47,6 @@ public class PoopAvoidManager : GameManager
             spawner.enabled = false;
         }
 
-        if (gameOverPanel)
-        {
-            gameOverPanel.SetActive(true);
-        }
-
-    }
-
-    public void Restart()
-    {
-        Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(
-            UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+        globalGameManager.GameOver();
     }
 }

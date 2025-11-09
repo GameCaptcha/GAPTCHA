@@ -15,10 +15,6 @@ public class DodgeManager : GameManager
         bulletManager.Refresh();
     }
 
-    public override void GameStart()
-    {
-
-    }
 
 
     public Transform GetPlayerTransform()

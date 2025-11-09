@@ -15,10 +15,5 @@ public class FlappyBirdManager : GameManager
         pipeGenerator.Init();
     }
 
-    public override void GameStart()
-    {
-
-    }
-
 
 }

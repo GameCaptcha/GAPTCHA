@@ -45,14 +45,14 @@ public class PoopAvoidPlayer : MonoBehaviour
 
         Vector3 dir = new Vector3(x, 0f, 0f).normalized;
 
-        transform.position += dir * moveSpeed * Time.deltaTime;
+        transform.localPosition += dir * moveSpeed * Time.deltaTime;
 
-        Vector3 p = transform.position;
+        Vector3 p = transform.localPosition;
         float halfW = spriteRender.bounds.extents.x;
         float halfH = spriteRender.bounds.extents.y;
         p.x = Mathf.Clamp(p.x, minBound.x + halfW, maxBound.x - halfW);
         p.y = Mathf.Clamp(p.y, minBound.y + halfH, maxBound.y - halfH);
-        transform.position = p;
+        transform.localPosition = p;
     }
 
     public void SetInverted(bool value)
