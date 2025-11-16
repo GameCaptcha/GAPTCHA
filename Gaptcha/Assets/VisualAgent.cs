@@ -43,6 +43,7 @@ public class VisualAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+        GlobalDatas.DebugLog("Agent.OnActionReceived(): called");
         bool endEpisodeFlag = false;
         
         var discreteActions = actionBuffers.DiscreteActions;
@@ -50,6 +51,7 @@ public class VisualAgent : Agent
         {
             // Debug.Log("Agent.OnActionReceived(): discreteActions[0]=" + discreteActions[0]);
             globalGameManager.actionIndex = discreteActions[0];
+            GlobalDatas.DebugLog("Agent.OnActionReceived(): actionIndex=" + globalGameManager.actionIndex);
         }
 
         if (episodeEnd)
@@ -73,6 +75,7 @@ public class VisualAgent : Agent
         }
         // Again, never put any code after EndEpisode()
         // Because EndEpisode() call OnEpisodeBegin() immediately.
+        GlobalDatas.DebugLog("Agent.OnActionReceived(): end");
     }
     
     public override void Heuristic(in ActionBuffers actionsOut)

@@ -46,6 +46,7 @@ public class Player : UpdateBehaviour
 
     protected virtual void InputUpdate()
     {
+        GlobalDatas.DebugLog("Player InputUpdate: actionIndex=" + globalGameManager.actionIndex);
         movePosX = 0;
         movePosY = 0;
 
