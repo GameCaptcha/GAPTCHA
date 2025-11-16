@@ -1354,6 +1354,7 @@ MonoBehaviour:
   actionIndex: 0
   mainCamera: {fileID: 660950394671427896}
   visualAgent: {fileID: 5136336525042765507}
+  gamesParent: {fileID: 1986530577516948326}
   gameManagerList:
   - {fileID: 7061680080004752186}
 --- !u!1 &6934185208743122856
