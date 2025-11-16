@@ -108,7 +108,7 @@ public class VisualAgent : Agent
         {
             inputValue *= InputValue.DOWN;
         }
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space)) 
         {
             inputValue = InputValue.SPACE;
         }

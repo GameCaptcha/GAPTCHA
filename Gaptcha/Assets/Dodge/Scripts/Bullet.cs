@@ -25,8 +25,8 @@ public class Bullet : UpdateBehaviour
     override protected void FUpdate()
     {
         base.FUpdate();
-        transform.localPosition += (Vector3)normalizedTargetVector * speed * Time.smoothDeltaTime;
-        elapsedTime += Time.smoothDeltaTime;
+        transform.localPosition += (Vector3)normalizedTargetVector * speed * Time.fixedDeltaTime;
+        elapsedTime += Time.fixedDeltaTime;
         if (elapsedTime >= destroyTime)
         {
             Destroy(gameObject);

@@ -32,7 +32,7 @@ public class BulletManager : UpdateBehaviour
     override protected void FUpdate()
     {
         base.FUpdate();
-        elapsedTime += Time.smoothDeltaTime;
+        elapsedTime += Time.fixedDeltaTime;
 
         if (elapsedTime >= delayTime) 
         {

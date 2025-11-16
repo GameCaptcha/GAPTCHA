@@ -11,7 +11,7 @@ public class FlappyBirdManager : GameManager
     }
     public override void Refresh()
     {
-        flappyBirdPlayer.Init();
+        flappyBirdPlayer.Refresh();
         pipeGenerator.Init();
     }
 

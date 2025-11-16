@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class FlappyBirdPlayer : UpdateBehaviour
+public class FlappyBirdPlayer : Player
 {
     private float _jumpPower = 4; // 점프 세기
 
@@ -9,36 +9,39 @@ public class FlappyBirdPlayer : UpdateBehaviour
     private bool _jumpPressed;
     
     [SerializeField] Rigidbody2D myRigidbody;
-    [SerializeField] GlobalGameManager globalGameManager;
 
-    void Start() 
+    protected override void Init()
     {
+        base.Init();
         myRigidbody = GetComponent<Rigidbody2D>();
-    }
-
-    public void Init()
-    {
         _isDie = false;
     }
 
-    override protected void FUpdate()
+    public override void Refresh()
     {
-        base.FUpdate();
-        if (Input.GetKeyDown(KeyCode.Space))
-            _jumpPressed = true;
+        base.Refresh();
+        _isDie = false;
     }
 
-    private void FixedUpdate() 
+
+    protected override void Space()
     {
-        if (_jumpPressed) 
+        base.Space();
+        _jumpPressed = true;
+    }
+
+    protected override void FUpdate()
+    {
+        base.FUpdate();
+        if (_jumpPressed)
         {
             myRigidbody.AddForce(Vector2.up * _jumpPower, ForceMode2D.Impulse);
             transform.rotation = Quaternion.Euler(0, 0, 15f);
-            
+
             _jumpPressed = false;
         }
 
-        if (myRigidbody.linearVelocity.y < -.5f && myRigidbody.linearVelocity.y > -4f) 
+        if (myRigidbody.linearVelocity.y < -.5f && myRigidbody.linearVelocity.y > -4f)
         {
             transform.Rotate(0, 0, -1.5f);
         }
@@ -46,7 +49,6 @@ public class FlappyBirdPlayer : UpdateBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) 
     {
-        Debug.Log("GameOver");
         _isDie = true;
 
         globalGameManager.GameOver();

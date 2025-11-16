@@ -27,11 +27,11 @@ public class PipeGenerator : UpdateBehaviour
     override protected void FUpdate()
     {
         base.FUpdate();
-        _timer += Time.deltaTime;
+        _timer += Time.fixedDeltaTime;
         
         if (_timer >= coolDown) { 
             GameObject newPipe = Instantiate(pipe, pipeParent);
-            newPipe.transform.position = new Vector3(6, Random.Range(-1.1f, 0.8f), 0);
+            newPipe.transform.localPosition = new Vector3(6, Random.Range(-1.1f, 0.8f), 0);
             Destroy(newPipe, 7.0f);
             
             _timer -= coolDown;

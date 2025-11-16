@@ -8,7 +8,7 @@ public class Poop : UpdateBehaviour
     override protected void FUpdate()
     {
         base.FUpdate();
-        transform.localPosition += Vector3.down * fallSpeed * Time.smoothDeltaTime;
+        transform.localPosition += Vector3.down * fallSpeed * Time.fixedDeltaTime;
         if (transform.localPosition.y < destroyY)
             Destroy(gameObject);
     }

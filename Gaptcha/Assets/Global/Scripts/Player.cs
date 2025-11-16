@@ -14,6 +14,9 @@ public class Player : UpdateBehaviour
     protected int movePosX = 0;
     protected int movePosY = 0;
 
+    float spaceElapsedTime = 0;
+    const float spaceDelayTime = 0.15f;
+
 
     void Awake()
     {
@@ -37,6 +40,8 @@ public class Player : UpdateBehaviour
         base.FUpdate();
         InputUpdate();
         Move();
+
+        spaceElapsedTime -= Time.fixedDeltaTime;
     }
 
     protected virtual void InputUpdate()
@@ -44,9 +49,13 @@ public class Player : UpdateBehaviour
         movePosX = 0;
         movePosY = 0;
 
-        if(globalGameManager.actionIndex == InputValue.SPACE)
+        if(globalGameManager.actionIndex == GlobalDatas.ConvertInputValueToIndex(InputValue.SPACE))
         {
-            Space();
+            if (spaceElapsedTime <= 0)
+            {
+                Space();
+                spaceElapsedTime = spaceDelayTime;
+            }
         }
         else
         {
