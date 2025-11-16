@@ -43,6 +43,8 @@ public class VisualAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
+        bool endEpisodeFlag = false;
+        
         var discreteActions = actionBuffers.DiscreteActions;
         if (true)
         {
@@ -54,34 +56,23 @@ public class VisualAgent : Agent
         {
             episodeEnd = false;
             GlobalDatas.DebugLog("Agent.OnActionReceived(): EndEpisode");
+            globalGameManager.GameChange(allowSame: true);
             SetReward(-1f);
-            EndEpisode();
+            endEpisodeFlag = true;  // will call EndEpisode() at the end of this method
         }
         else
         {
             SetReward(0.01f);
         }
-        // // Actions, size = 2
-        // Vector3 controlSignal = Vector3.zero;
-        // controlSignal.x = actionBuffers.ContinuousActions[0];
-        // controlSignal.z = actionBuffers.ContinuousActions[1];
-        // rBody.AddForce(controlSignal * forceMultiplier);
-        //
-        // // Rewards
-        // float distanceToTarget = Vector3.Distance(this.transform.localPosition, Target.localPosition);
-        //
-        // // Reached target
-        // if (distanceToTarget < 1.42f)
-        // {
-        //     SetReward(1.0f);
-        //     EndEpisode();
-        // }
-        //
-        // // Fell off platform
-        // else if (this.transform.localPosition.y < 0)
-        // {
-        //     EndEpisode();
-        // }
+
+        if (endEpisodeFlag)
+        {
+            EndEpisode();
+            // Never put any code after EndEpisode()
+            // Because EndEpisode() call OnEpisodeBegin() immediately.
+        }
+        // Again, never put any code after EndEpisode()
+        // Because EndEpisode() call OnEpisodeBegin() immediately.
     }
     
     public override void Heuristic(in ActionBuffers actionsOut)
