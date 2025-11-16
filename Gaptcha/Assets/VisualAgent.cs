@@ -54,6 +54,7 @@ public class VisualAgent : Agent
         {
             episodeEnd = false;
             GlobalDatas.DebugLog("Agent.OnActionReceived(): EndEpisode");
+            globalGameManager.GameChange(allowSame: true);
             SetReward(-1f);
             EndEpisode();
         }

@@ -33,7 +33,7 @@ public class GlobalGameManager : UpdateBehaviour
         GameStart();
     }
 
-    public void GameChange()
+    public void GameChange(bool allowSame = false)
     {
         int count = gameManagerList.Count;
         if (count == 0)
@@ -52,6 +52,10 @@ public class GlobalGameManager : UpdateBehaviour
         else if (count == 1)
         {
             selectedIndex = 0;
+        }
+        else if (allowSame)
+        {
+            selectedIndex = UnityEngine.Random.Range(0, count);
         }
         else
         {
