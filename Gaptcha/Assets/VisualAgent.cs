@@ -24,6 +24,7 @@ public class VisualAgent : Agent
     
     public override void CollectObservations(VectorSensor sensor)
     {
+        GlobalDatas.DebugLog("Agent.CollectObservations()");
         // // Target and Agent positions
         // sensor.AddObservation(Target.localPosition);
         // sensor.AddObservation(this.transform.localPosition);
