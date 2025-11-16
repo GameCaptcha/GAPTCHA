@@ -97,3 +97,6 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /Gaptcha/[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# JetBrains IDEs
+.idea/
