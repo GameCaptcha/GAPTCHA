@@ -15,5 +15,9 @@ public class FlappyBirdManager : GameManager
         pipeGenerator.Init();
     }
 
+    public override void GameOver()
+    {
+
+    }
 
 }

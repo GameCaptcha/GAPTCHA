@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class FlappyBirdPlayer : MonoBehaviour
+public class FlappyBirdPlayer : UpdateBehaviour
 {
     private float _jumpPower = 4; // 점프 세기
 
@@ -21,8 +21,9 @@ public class FlappyBirdPlayer : MonoBehaviour
         _isDie = false;
     }
 
-    void Update() 
+    override protected void FUpdate()
     {
+        base.FUpdate();
         if (Input.GetKeyDown(KeyCode.Space))
             _jumpPressed = true;
     }

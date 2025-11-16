@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TrainingAreaManager : MonoBehaviour
+public class TrainingAreaManager : UpdateBehaviour
 {
     [SerializeField] Transform trainingAreaParent;
     [SerializeField] TrainingArea trainingAreaPrefab;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : UpdateBehaviour
 {
 
     Vector3 targetPosition;
@@ -22,8 +22,9 @@ public class Bullet : MonoBehaviour
         speed = 5.0f;
     }
 
-    private void Update()
+    override protected void FUpdate()
     {
+        base.FUpdate();
         transform.localPosition += (Vector3)normalizedTargetVector * speed * Time.smoothDeltaTime;
         elapsedTime += Time.smoothDeltaTime;
         if (elapsedTime >= destroyTime)

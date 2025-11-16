@@ -313,6 +313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trainingAreaParent: {fileID: 1948711190}
   trainingAreaPrefab: {fileID: 7192392324758014814, guid: a8b0274a71ea2884e9faca8f151038a8, type: 3}
+  X_MAX: 1
+  Y_MAX: 5
 --- !u!4 &1948711190
 Transform:
   m_ObjectHideFlags: 0
@@ -322,7 +324,7 @@ Transform:
   m_GameObject: {fileID: 1948711188}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.26951241, y: -0.001673542, z: -10.097376}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

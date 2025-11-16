@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PoopSpawner : MonoBehaviour
+public class PoopSpawner : UpdateBehaviour
 {
     [SerializeField] Transform poopParent;
     public Poop poopPrefab;
@@ -24,8 +24,9 @@ public class PoopSpawner : MonoBehaviour
         }
     }
 
-    void Update()
+    override protected void FUpdate()
     {
+        base.FUpdate();
         timer += Time.deltaTime;
         if (timer >= spawnInterval)
         {

@@ -1,7 +1,7 @@
 using Unity.MLAgents;
 using UnityEngine;
 
-public class GameModifier : MonoBehaviour
+public class GameModifier : UpdateBehaviour
 {
     public SpriteRenderer playerRenderer;
     public PoopSpawner spawner;
@@ -26,8 +26,9 @@ public class GameModifier : MonoBehaviour
         GlobalDatas.DebugLog($"[GameModifier] Selected Mode: {activeMode}");
     }
 
-    void Update()
+    override protected void FUpdate()
     {
+        base.FUpdate();
         float t = Time.time;
 
         switch (activeMode)

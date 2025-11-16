@@ -1,58 +1,35 @@
 using UnityEngine;
 
-public class PoopAvoidPlayer : MonoBehaviour
+public class PoopAvoidPlayer : Player
 {
-    [SerializeField] PoopAvoidManager poopAvoidManager;
-    [SerializeField] GlobalGameManager globalGameManager;
-
-    public float moveSpeed = 6f;
-
-    Vector2 minBound;
-
-    [SerializeField]
-    Vector2 maxBound;
-
-    [SerializeField]
-    SpriteRenderer spriteRender;
-
     bool isInverted = false;
 
-
-    void Awake()
+    protected override void Init()
     {
-        minBound = GlobalDatas.GetMinScreenBound();
-        maxBound = GlobalDatas.GetMaxScreenBound();
+        base.Init();
+        speed = 5.5f;
+        refreshPosition = new Vector3(0, -4.120f, 0);
     }
 
-    void Update()
+
+    override protected void InputUpdate()
     {
-        float x = 0;
-        if (globalGameManager.actionIndex == 0)
-        {
-            x = 0;
-        } else if (globalGameManager.actionIndex == 1)
-        {
-            x = -1;
-        } else if (globalGameManager.actionIndex == 2)
-        {
-            x = 1;
-        }
+        base.InputUpdate();
 
         if (isInverted)
         {
-            x *= -1;
+            movePosX *= -1;
         }
+    }
+    protected override void Move()
+    {
+        base.Move();
 
-        Vector3 dir = new Vector3(x, 0f, 0f).normalized;
+        Vector3 dir = new Vector3(movePosX, 0f, 0f).normalized;
 
-        transform.localPosition += dir * moveSpeed * Time.deltaTime;
-
-        Vector3 p = transform.localPosition;
-        float halfW = spriteRender.bounds.extents.x;
-        float halfH = spriteRender.bounds.extents.y;
-        p.x = Mathf.Clamp(p.x, minBound.x + halfW, maxBound.x - halfW);
-        p.y = Mathf.Clamp(p.y, minBound.y + halfH, maxBound.y - halfH);
-        transform.localPosition = p;
+        transform.localPosition += dir * speed * Time.smoothDeltaTime;
+         
+        CheckPlayableBound();
     }
 
     public void SetInverted(bool value)
@@ -65,7 +42,7 @@ public class PoopAvoidPlayer : MonoBehaviour
     {
         if (other.CompareTag("Poop"))
         {
-            poopAvoidManager.OnPlayerHit();
+            globalGameManager.GameOver();
         }
     }
 }

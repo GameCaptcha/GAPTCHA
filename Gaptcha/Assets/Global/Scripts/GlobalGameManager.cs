@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class GlobalGameManager : MonoBehaviour
+public class GlobalGameManager : UpdateBehaviour
 {
     [FormerlySerializedAs("ActionIndex")] public int actionIndex = 0;
 
@@ -79,6 +79,11 @@ public class GlobalGameManager : MonoBehaviour
     public void GameOver()
     {
         GlobalDatas.DebugLog("GameOver()");
+
+        for (int i = 0; i < gameManagerList.Count; ++i)
+        {
+            gameManagerList[i].GameOver();
+        }
 
         visualAgent.OnEndEpisode();
     }

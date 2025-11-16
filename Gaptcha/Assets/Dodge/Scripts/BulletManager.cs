@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletManager : MonoBehaviour
+public class BulletManager : UpdateBehaviour
 {
     [SerializeField] DodgeManager dodgeManager;
 
@@ -29,8 +29,9 @@ public class BulletManager : MonoBehaviour
         }
     }
 
-    void Update()
+    override protected void FUpdate()
     {
+        base.FUpdate();
         elapsedTime += Time.smoothDeltaTime;
 
         if (elapsedTime >= delayTime) 

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class DodgeManager : GameManager
 {
-    [SerializeField] Player player;
     [SerializeField] BulletManager bulletManager;
 
     protected override void SetGameKind()
@@ -13,8 +12,13 @@ public class DodgeManager : GameManager
     {
         bulletManager.Init();
         bulletManager.Refresh();
+        player.Refresh();
     }
 
+    public override void GameOver()
+    {
+
+    }
 
 
     public Transform GetPlayerTransform()

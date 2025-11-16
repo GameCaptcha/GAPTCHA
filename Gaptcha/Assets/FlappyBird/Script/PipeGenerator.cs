@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PipeGenerator : MonoBehaviour 
+public class PipeGenerator : UpdateBehaviour
 {
     [SerializeField] Transform pipeParent;
     [SerializeField] GameObject pipe; // 파이프 프리팹
@@ -23,9 +23,10 @@ public class PipeGenerator : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
-    
-    void Update() 
+
+    override protected void FUpdate()
     {
+        base.FUpdate();
         _timer += Time.deltaTime;
         
         if (_timer >= coolDown) { 

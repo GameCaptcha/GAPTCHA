@@ -18,13 +18,15 @@ public class PoopAvoidManager : GameManager
     {
         spawner.enabled = true;
         spawner.Refresh();
+        player.Refresh();
 
         surviveTime = 0f;
         isGameOver = false;
     }
 
-    void Update()
+    override protected void FUpdate()
     {
+        base.FUpdate();
         if (isGameOver) 
             return;
 
@@ -35,7 +37,7 @@ public class PoopAvoidManager : GameManager
         }
     }
 
-    public void OnPlayerHit()
+    public override void GameOver()
     {
         if (isGameOver) 
             return;
@@ -46,7 +48,5 @@ public class PoopAvoidManager : GameManager
         {
             spawner.enabled = false;
         }
-
-        globalGameManager.GameOver();
     }
 }

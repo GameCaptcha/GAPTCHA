@@ -89,16 +89,34 @@ public class VisualAgent : Agent
         GlobalDatas.DebugLog("Agent.Heuristic()");
         // var continuousActionsOut = actionsOut.ContinuousActions;
         var discreteActionsOut = actionsOut.DiscreteActions;
-        int index = 0;
+        
+        int inputValue = InputValue.NONE;
+
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            index = 1;
-        } else if (Input.GetKey(KeyCode.RightArrow))
-        {
-            index = 2;
+            inputValue *= InputValue.LEFT;
         }
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            inputValue *= InputValue.RIGHT;
+        }
+        if (Input.GetKey(KeyCode.UpArrow))
+        {
+            inputValue *= InputValue.UP;
+        }
+        if (Input.GetKey(KeyCode.DownArrow))
+        {
+            inputValue *= InputValue.DOWN;
+        }
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            inputValue = InputValue.SPACE;
+        }
+
+        int index = GlobalDatas.ConvertInputValueToIndex(inputValue);
+
+
         discreteActionsOut[0] = index;
-        // continuousActionsOut[1] = Input.GetAxis("Vertical");
     }
 
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TrainingArea : MonoBehaviour
+public class TrainingArea : UpdateBehaviour
 {
     [SerializeField] HumanCamera humanCamera;
 

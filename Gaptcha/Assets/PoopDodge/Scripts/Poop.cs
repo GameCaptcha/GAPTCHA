@@ -1,14 +1,15 @@
 using UnityEngine;
 
-public class Poop : MonoBehaviour
+public class Poop : UpdateBehaviour
 {
     public float fallSpeed = 3f;
     public float destroyY = -6f;
 
-    void Update()
+    override protected void FUpdate()
     {
-        transform.position += Vector3.down * fallSpeed * Time.deltaTime;
-        if (transform.position.y < destroyY)
+        base.FUpdate();
+        transform.localPosition += Vector3.down * fallSpeed * Time.smoothDeltaTime;
+        if (transform.localPosition.y < destroyY)
             Destroy(gameObject);
     }
 }
