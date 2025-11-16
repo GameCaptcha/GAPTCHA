@@ -43,36 +43,37 @@ public class GlobalGameManager : UpdateBehaviour
             return;
         }
 
+        int selectedIndex;
 
         if (nowGameManager == null)
         {
-            int index = UnityEngine.Random.Range(0, count);
-            nowGameManager = gameManagerList[index];
-            return;
+            selectedIndex = UnityEngine.Random.Range(0, count);
         }
-
-        if (count == 1)
+        else if (count == 1)
         {
-            nowGameManager = gameManagerList[0];
-            return;
+            selectedIndex = 0;
         }
-
-        int currentIndex = gameManagerList.IndexOf(nowGameManager);
-        if (currentIndex < 0)
+        else
         {
-            GlobalDatas.DebugLogError("GameChange(): not found nowGameManager in gameManagerList");
-            int index = UnityEngine.Random.Range(0, count);
-            nowGameManager = gameManagerList[index];
-            return;
+            int currentIndex = gameManagerList.IndexOf(nowGameManager);
+            if (currentIndex < 0)
+            {
+                GlobalDatas.DebugLogError("GameChange(): not found nowGameManager in gameManagerList");
+                selectedIndex = UnityEngine.Random.Range(0, count);
+            }
+            else
+            {
+                int nextIndex = UnityEngine.Random.Range(0, count - 1);
+                if (nextIndex >= currentIndex)
+                {
+                    nextIndex++;
+                }
+                selectedIndex = nextIndex;
+            }
         }
 
-        int nextIndex = UnityEngine.Random.Range(0, count - 1);
-        if (nextIndex >= currentIndex)
-        {
-            nextIndex++;
-        }
-
-        nowGameManager = gameManagerList[nextIndex];
+        nowGameManager = gameManagerList[selectedIndex];
+        GlobalDatas.DebugLog("GameChange(): nowGameManager=" + nowGameManager + ", index=" + selectedIndex);
     }
 
     void GameStart()
