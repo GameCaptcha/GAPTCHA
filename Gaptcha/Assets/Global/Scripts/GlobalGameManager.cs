@@ -10,7 +10,7 @@ public class GlobalGameManager : UpdateBehaviour
     [SerializeField] Camera mainCamera;
     [SerializeField] VisualAgent visualAgent;
 
-
+    public GameObject gamesParent;
     [SerializeField] List<GameManager> gameManagerList = new List<GameManager>();
     GameManager nowGameManager = null;
 
@@ -18,20 +18,41 @@ public class GlobalGameManager : UpdateBehaviour
 
     void Awake()
     {
+        if (gamesParent != null)
+        {
+            int childCount = gamesParent.transform.childCount;
+            // Disable all children from the parent
+            // so even modules not added to gameManagerList stay inactive.
+            // If we skip this, a prefab that is active in the parent
+            // but missing from the list can keep running and create hard bugs.
+            for (int i = 0; i < childCount; ++i)
+            {
+                Transform child = gamesParent.transform.GetChild(i);
+                child.gameObject.SetActive(false);
+                GlobalDatas.DebugLog("Awake(): deactivate child '" + child.gameObject.name + "'");
+            }
+        }
+        else
+        {
+            GlobalDatas.DebugLogError("Awake(): gamesParent is not assigned");
+        }
+
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
-            GlobalDatas.DebugLog("Init(): gameManagerList[i]=" + gameManagerList[i]);
+            // GlobalDatas.DebugLog("Init(): gameManagerList[i]=" + gameManagerList[i]);
+            // gameManagerList[i].gameObject.SetActive(false);
+            GlobalDatas.DebugLog("Awake(): deactivate gameManagerList[" + i + "]=" + gameManagerList[i]);
             gameManagerList[i].gameObject.SetActive(false);
         }
 
         GameChange();
     }
 
-    private void Start()
-    {
-        GlobalDatas.DebugLog("Start");
-        GameStart();
-    }
+    // private void Start()
+    // {
+    //     GlobalDatas.DebugLog("Start");
+    //     GameStart();
+    // }
 
     public void GameChange(bool allowSame = false)
     {
