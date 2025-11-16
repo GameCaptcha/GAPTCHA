@@ -15,7 +15,7 @@ public class DodgePlayer : Player
     {
         if (collision.tag == "Bullet")
         {
-            Debug.Log("Hit bullet");
+            GlobalDatas.DebugLog("Hit bullet");
             globalGameManager.GameOver();
         }
     }
