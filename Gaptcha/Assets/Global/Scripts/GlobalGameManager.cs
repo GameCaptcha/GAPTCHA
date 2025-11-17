@@ -40,19 +40,19 @@ public class GlobalGameManager : UpdateBehaviour
             {
                 Transform child = gamesParent.transform.GetChild(i);
                 child.gameObject.SetActive(false);
-                GlobalDatas.DebugLog("Awake(): deactivate child '" + child.gameObject.name + "'");
+                GlobalDatas.DebugLog(() => "Awake(): deactivate child '" + child.gameObject.name + "'");
             }
         }
         else
         {
-            GlobalDatas.DebugLogError("Awake(): gamesParent is not assigned");
+            GlobalDatas.DebugLogError(() => "Awake(): gamesParent is not assigned");
         }
 
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
-            // GlobalDatas.DebugLog("Init(): gameManagerList[i]=" + gameManagerList[i]);
+            // GlobalDatas.DebugLog(() => "Init(): gameManagerList[i]=" + gameManagerList[i]);
             // gameManagerList[i].gameObject.SetActive(false);
-            GlobalDatas.DebugLog("Awake(): deactivate gameManagerList[" + i + "]=" + gameManagerList[i]);
+            GlobalDatas.DebugLog(() => "Awake(): deactivate gameManagerList[" + i + "]=" + gameManagerList[i]);
             gameManagerList[i].gameObject.SetActive(false);
         }
 
@@ -97,7 +97,7 @@ public class GlobalGameManager : UpdateBehaviour
         int count = gameManagerList.Count;
         if (count == 0)
         {
-            GlobalDatas.DebugLogError("GameChange(): gameManagerList is empty");
+            GlobalDatas.DebugLogError(() => "GameChange(): gameManagerList is empty");
             nowGameManager = null;
             return;
         }
@@ -121,7 +121,7 @@ public class GlobalGameManager : UpdateBehaviour
             int currentIndex = gameManagerList.IndexOf(nowGameManager);
             if (currentIndex < 0)
             {
-                GlobalDatas.DebugLogError("GameChange(): not found nowGameManager in gameManagerList");
+                GlobalDatas.DebugLogError(() => "GameChange(): not found nowGameManager in gameManagerList");
                 selectedIndex = UnityEngine.Random.Range(0, count);
             }
             else
@@ -142,7 +142,7 @@ public class GlobalGameManager : UpdateBehaviour
         nowGameManager = gameManagerList[selectedIndex];
         nowGameManager.gameObject.SetActive(true);
         nowGameManager.Refresh();
-        GlobalDatas.DebugLog("GameChange(): nowGameManager=" + nowGameManager + ", index=" + selectedIndex);
+        GlobalDatas.DebugLog(() => "GameChange(): nowGameManager=" + nowGameManager + ", index=" + selectedIndex);
 
     }
 
@@ -150,16 +150,16 @@ public class GlobalGameManager : UpdateBehaviour
     {
         if(nowGameManager == null)
         {
-            GlobalDatas.DebugLogError("not exist Game manager");
+            GlobalDatas.DebugLogError(() => "not exist Game manager");
             return;
         }
 
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
-            GlobalDatas.DebugLog("GameStart(): for: gameManagerList[i]=" + gameManagerList[i]);
+            GlobalDatas.DebugLog(() => "GameStart(): for: gameManagerList[i]=" + gameManagerList[i]);
             gameManagerList[i].gameObject.SetActive(false);
         }
-        GlobalDatas.DebugLog("GameStart(): nowGameManager=" + nowGameManager);
+        GlobalDatas.DebugLog(() => "GameStart(): nowGameManager=" + nowGameManager);
         nowGameManager.gameObject.SetActive(true);
 
         nowGameManager.Refresh();
@@ -167,7 +167,7 @@ public class GlobalGameManager : UpdateBehaviour
 
     public void GameOver()
     {
-        GlobalDatas.DebugLog("GameOver()");
+        GlobalDatas.DebugLog(() => "GameOver()");
 
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
@@ -202,7 +202,7 @@ public class GlobalGameManager : UpdateBehaviour
         }
         else
         {
-            GlobalDatas.DebugLogError("PerformOnEpisodeBegin(): not exist nowGameManager");
+            GlobalDatas.DebugLogError(() => "PerformOnEpisodeBegin(): not exist nowGameManager");
         }
     }
 }

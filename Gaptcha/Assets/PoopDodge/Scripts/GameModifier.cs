@@ -23,7 +23,7 @@ public class GameModifier : UpdateBehaviour
         return;
         activeMode = (Mode)Random.Range(0, 4);
 
-        GlobalDatas.DebugLog($"[GameModifier] Selected Mode: {activeMode}");
+        GlobalDatas.DebugLog(() => $"[GameModifier] Selected Mode: {activeMode}");
     }
 
     override protected void FUpdate()

@@ -32,7 +32,7 @@ public class GlobalDebuffManager : UpdateBehaviour
 
     public void ChangeDebuff(bool allowSame = false)
     {
-        GlobalDatas.DebugLog("GDM ChangeDebuff CALLED");
+        GlobalDatas.DebugLog(() => "GDM ChangeDebuff CALLED");
 
         if (debuffManagerList.Count <= 0)
             return;
@@ -59,7 +59,7 @@ public class GlobalDebuffManager : UpdateBehaviour
         }
 
         nowDebuffManager = debuffManagerList[randIndex];
-        GlobalDatas.DebugLog("CALLING " + nowDebuffManager);
+        GlobalDatas.DebugLog(() => "CALLING " + nowDebuffManager);
 
         ShaderDebuff shaderDebuff = nowDebuffManager as ShaderDebuff;
         if (shaderDebuff != null)

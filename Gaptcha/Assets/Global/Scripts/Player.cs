@@ -46,7 +46,7 @@ public class Player : SpriteBehaviour
 
     protected virtual void InputUpdate()
     {
-        GlobalDatas.DebugLog("Player InputUpdate: actionIndex=" + globalGameManager.actionIndex);
+        GlobalDatas.DebugLog(() => "Player InputUpdate: actionIndex=" + globalGameManager.actionIndex);
         movePosX = 0;
         movePosY = 0;
 
@@ -100,7 +100,7 @@ public class Player : SpriteBehaviour
 
     public void SetSpeed(float value)
     {
-        GlobalDatas.DebugLog("PLAYER SPEED CHANGED TO " + value);
+        GlobalDatas.DebugLog(() => "PLAYER SPEED CHANGED TO " + value);
         speed = value;
     }
 }

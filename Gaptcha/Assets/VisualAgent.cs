@@ -48,7 +48,7 @@ public class VisualAgent : Agent
         if (this == MainVisualAgent && agentCameraSensorOn != null)
         {
             agentCameraSensorOn.enabled = true;
-            GlobalDatas.DebugLog("Agent.Start(): enabled agentCameraSensorOn");
+            GlobalDatas.DebugLog(() => "Agent.Start(): enabled agentCameraSensorOn");
         }
     }
 
@@ -78,13 +78,13 @@ public class VisualAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        GlobalDatas.DebugLog("Agent.OnEpisodeBegin()");
+        GlobalDatas.DebugLog(() => "Agent.OnEpisodeBegin()");
         globalGameManager.PerformOnEpisodeBegin();
     }
     
     public override void CollectObservations(VectorSensor sensor)
     {
-        GlobalDatas.DebugLog("Agent.CollectObservations()");
+        GlobalDatas.DebugLog(() => "Agent.CollectObservations()");
         // // Target and Agent positions
         // sensor.AddObservation(Target.localPosition);
         // sensor.AddObservation(this.transform.localPosition);
@@ -104,7 +104,7 @@ public class VisualAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        GlobalDatas.DebugLog("Agent.OnActionReceived(): called");
+        GlobalDatas.DebugLog(() => "Agent.OnActionReceived(): called");
         bool endEpisodeFlag = false;
         
         var discreteActions = actionBuffers.DiscreteActions;
@@ -112,13 +112,13 @@ public class VisualAgent : Agent
         {
             // Debug.Log("Agent.OnActionReceived(): discreteActions[0]=" + discreteActions[0]);
             globalGameManager.actionIndex = discreteActions[0];
-            GlobalDatas.DebugLog("Agent.OnActionReceived(): actionIndex=" + globalGameManager.actionIndex);
+            GlobalDatas.DebugLog(() => "Agent.OnActionReceived(): actionIndex=" + globalGameManager.actionIndex);
         }
 
         if (episodeEnd)
         {
             episodeEnd = false;
-            GlobalDatas.DebugLog("Agent.OnActionReceived(): EndEpisode");
+            GlobalDatas.DebugLog(() => "Agent.OnActionReceived(): EndEpisode");
             globalGameManager.GameChange(allowSame: true);
             SetReward(-1f);
             endEpisodeFlag = true;  // will call EndEpisode() at the end of this method
@@ -136,12 +136,12 @@ public class VisualAgent : Agent
         }
         // Again, never put any code after EndEpisode()
         // Because EndEpisode() call OnEpisodeBegin() immediately.
-        GlobalDatas.DebugLog("Agent.OnActionReceived(): end");
+        GlobalDatas.DebugLog(() => "Agent.OnActionReceived(): end");
     }
     
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        GlobalDatas.DebugLog("Agent.Heuristic()");
+        GlobalDatas.DebugLog(() => "Agent.Heuristic()");
         // var continuousActionsOut = actionsOut.ContinuousActions;
         var discreteActionsOut = actionsOut.DiscreteActions;
         

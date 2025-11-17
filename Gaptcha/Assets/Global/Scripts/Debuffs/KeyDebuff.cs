@@ -33,7 +33,7 @@ public class KeyDebuff : DebuffManager
 
         isDebuffActive = true;
 
-        GlobalDatas.DebugLog("KeyDebuff Enter: Selected Key Value " + randomValue);
+        GlobalDatas.DebugLog(() => "KeyDebuff Enter: Selected Key Value " + randomValue);
     }
 
     public override void DebuffUpdate()

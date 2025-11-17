@@ -58,32 +58,18 @@ public class GlobalDatas
         return screenSize / 2.0f;
     }
 
-    public static void DebugLog(string log)
+    public static void DebugLog(Func<object> logProvider)
     {
-        if (DEBUG_PRINT)
+        if (DEBUG_PRINT && logProvider != null)
         {
-            Debug.Log(log);
+            Debug.Log(logProvider());
         }
     }
-    public static void DebugLog(int log)
+    public static void DebugLogError(Func<object> logProvider)
     {
-        if (DEBUG_PRINT)
+        if (DEBUG_PRINT && logProvider != null)
         {
-            Debug.Log(log);
-        }
-    }
-    public static void DebugLogError(string log)
-    {
-        if (DEBUG_PRINT)
-        {
-            Debug.LogError(log);
-        }
-    }
-    public static void DebugLogError(int log)
-    {
-        if (DEBUG_PRINT)
-        {
-            Debug.LogError(log);
+            Debug.LogError(logProvider());
         }
     }
 
