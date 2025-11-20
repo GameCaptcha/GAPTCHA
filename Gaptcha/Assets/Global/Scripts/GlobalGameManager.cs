@@ -156,6 +156,8 @@ public class GlobalGameManager : UpdateBehaviour
             gameManagerList[i].GameOver();
         }
 
+        elapsedDebuffTime = -gameChangeDelay / 2f;
+        debuffManager.Refresh();
         visualAgent.OnEndEpisode();
     }
 

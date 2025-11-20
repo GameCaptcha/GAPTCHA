@@ -18,7 +18,7 @@ public class GlobalDebuffManager : UpdateBehaviour
         }
     }
 
-    public void Refres()
+    public void Refresh()
     {
         nowDebuffManager = null;
     }
