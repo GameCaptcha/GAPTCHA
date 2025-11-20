@@ -1357,6 +1357,8 @@ MonoBehaviour:
   gamesParent: {fileID: 1986530577516948326}
   gameManagerList:
   - {fileID: 7061680080004752186}
+  - {fileID: 225639822680945501}
+  - {fileID: 1670260807080994354}
 --- !u!1 &6934185208743122856
 GameObject:
   m_ObjectHideFlags: 0

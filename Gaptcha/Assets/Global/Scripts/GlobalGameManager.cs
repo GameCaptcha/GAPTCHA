@@ -14,7 +14,8 @@ public class GlobalGameManager : UpdateBehaviour
     [SerializeField] List<GameManager> gameManagerList = new List<GameManager>();
     GameManager nowGameManager = null;
 
-    float gameChangeDelay = 8.0f;
+    [SerializeField] float gameChangeDelay = 8.0f;
+    float elapsedChangeTime = 0.0f;
 
     void Awake()
     {
@@ -53,6 +54,17 @@ public class GlobalGameManager : UpdateBehaviour
     //     GlobalDatas.DebugLog("Start");
     //     GameStart();
     // }
+    protected override void FUpdate()
+    {
+        base.FUpdate();
+
+        elapsedChangeTime += Time.fixedDeltaTime;
+        if (elapsedChangeTime >= gameChangeDelay)
+        {
+            elapsedChangeTime -= gameChangeDelay;
+            GameChange();
+        }
+    }
 
     public void GameChange(bool allowSame = false)
     {
@@ -155,6 +167,7 @@ public class GlobalGameManager : UpdateBehaviour
         if (nowGameManager)
         {
             nowGameManager.Refresh();
+            elapsedChangeTime = 0.0f;
         }
         else
         {
