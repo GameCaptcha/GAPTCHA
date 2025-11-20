@@ -5,6 +5,10 @@ using UnityEngine.Serialization;
 
 public class GlobalGameManager : UpdateBehaviour
 {
+    [SerializeField] GlobalDebuffManager debuffManager;
+
+
+
     [FormerlySerializedAs("ActionIndex")] public int actionIndex = 0;
 
     [SerializeField] Camera mainCamera;
@@ -16,6 +20,8 @@ public class GlobalGameManager : UpdateBehaviour
 
     [SerializeField] float gameChangeDelay = 8.0f;
     float elapsedChangeTime = 0.0f;
+
+    float elapsedDebuffTime = -8.0f;
 
     void Awake()
     {
@@ -49,20 +55,24 @@ public class GlobalGameManager : UpdateBehaviour
         GameChange();
     }
 
-    // private void Start()
-    // {
-    //     GlobalDatas.DebugLog("Start");
-    //     GameStart();
-    // }
+
     protected override void FUpdate()
     {
         base.FUpdate();
 
         elapsedChangeTime += Time.fixedDeltaTime;
+        elapsedDebuffTime += Time.fixedDeltaTime;
+
         if (elapsedChangeTime >= gameChangeDelay)
         {
             elapsedChangeTime -= gameChangeDelay;
             GameChange();
+        }
+
+        if(elapsedDebuffTime >= gameChangeDelay)
+        {
+            elapsedDebuffTime -= gameChangeDelay;
+            debuffManager.ChangeDebuff();
         }
     }
 
@@ -166,6 +176,7 @@ public class GlobalGameManager : UpdateBehaviour
         // Init();
         if (nowGameManager)
         {
+            elapsedDebuffTime = -gameChangeDelay / 2f;
             nowGameManager.Refresh();
             elapsedChangeTime = 0.0f;
         }

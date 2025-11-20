@@ -1228,6 +1228,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &5640167060408791674
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7101924677505179911}
+  - component: {fileID: 2821096131254628107}
+  m_Layer: 0
+  m_Name: DebuffManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7101924677505179911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5640167060408791674}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 589468625813012533}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2821096131254628107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5640167060408791674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224f884aa31716d4990ffcfc4088b657, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6358706513594669677
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,6 +1395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41754df970e45c4c893bf88ab471750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debuffManager: {fileID: 2821096131254628107}
   actionIndex: 0
   mainCamera: {fileID: 660950394671427896}
   visualAgent: {fileID: 5136336525042765507}
@@ -1359,6 +1404,7 @@ MonoBehaviour:
   - {fileID: 7061680080004752186}
   - {fileID: 225639822680945501}
   - {fileID: 1670260807080994354}
+  gameChangeDelay: 8
 --- !u!1 &6934185208743122856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,6 +1612,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3865911388209330898}
+  - {fileID: 7101924677505179911}
   - {fileID: 6910186471354843127}
   - {fileID: 3540836363655625168}
   - {fileID: 3355406508109116319}
