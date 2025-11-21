@@ -125,6 +125,7 @@ public class GlobalGameManager : UpdateBehaviour
         }
         nowGameManager = gameManagerList[selectedIndex];
         nowGameManager.gameObject.SetActive(true);
+        nowGameManager.Refresh();
         GlobalDatas.DebugLog("GameChange(): nowGameManager=" + nowGameManager + ", index=" + selectedIndex);
     }
 
