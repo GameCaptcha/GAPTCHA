@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GlobalDebuffManager : UpdateBehaviour
 {
-    List<DebuffManager> debuffManagerList = new List<DebuffManager>();
+    [SerializeField] List<DebuffManager> debuffManagerList = new List<DebuffManager>();
     DebuffManager nowDebuffManager = null;
 
     protected override void FUpdate()
@@ -20,6 +20,10 @@ public class GlobalDebuffManager : UpdateBehaviour
 
     public void Refresh()
     {
+        foreach (DebuffManager dm in debuffManagerList) {
+            if (dm != null) { dm.OnDebuffExit(); }
+        }
+
         nowDebuffManager = null;
     }
 
@@ -39,7 +43,10 @@ public class GlobalDebuffManager : UpdateBehaviour
             }
         }
 
+        if (nowDebuffManager != null) { nowDebuffManager.OnDebuffExit(); }
         nowDebuffManager = debuffManagerList[randIndex];
+        nowDebuffManager.OnDebuffEnter();
+
     }
 
 }
