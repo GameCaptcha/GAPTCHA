@@ -7,16 +7,16 @@ public class AfterImageDebuff : DebuffManager {
   public bool IsActive => _isActive;
 
 
-  public event Action<bool> OnShadowToggle;
+  public event Action<bool> OnImageDebuffToggle;
   
   public override void OnDebuffEnter() {
     _isActive = true;
-    OnShadowToggle?.Invoke(true);
+    OnImageDebuffToggle?.Invoke(true);
   }
 
   public override void OnDebuffExit() {
     _isActive = false;
-    OnShadowToggle?.Invoke(false);
+    OnImageDebuffToggle?.Invoke(false);
   }
 
   public override void DebuffUpdate() {
