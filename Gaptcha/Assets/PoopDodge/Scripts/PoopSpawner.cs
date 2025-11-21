@@ -3,6 +3,8 @@ using UnityEngine;
 public class PoopSpawner : UpdateBehaviour
 {
     [SerializeField] Transform poopParent;
+    [SerializeField] private AfterImageDebuff _shadowDebuff;
+    
     public Poop poopPrefab;
     public float spawnY = 6f;
     public Vector2 xRange = new Vector2(-5.0f, 5.0f);
@@ -43,7 +45,9 @@ public class PoopSpawner : UpdateBehaviour
         go.transform.localPosition = pos;
         go.tag = "Poop";
 
-        if (go != null)
+        if (go != null) {
             go.fallSpeed = poopSpeed;
+            go.GetComponentInChildren<AfterImageGenerator>().SetDebuff(_shadowDebuff);
+        }
     }
 }

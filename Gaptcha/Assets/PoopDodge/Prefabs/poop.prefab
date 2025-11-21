@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8986797521672948741}
   - component: {fileID: 4923045959855001018}
   - component: {fileID: 4529016941819920977}
+  - component: {fileID: 2989521709974470741}
   m_Layer: 0
   m_Name: poop
   m_TagString: Poop
@@ -149,3 +150,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallSpeed: 3
   destroyY: -6
+--- !u!114 &2989521709974470741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 364494824024009426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ce651e300004ab88d32c7c46e0b406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debuff: {fileID: 0}
+  _sprite: {fileID: 8986797521672948741}
+  _coolDown: 0.1
+  _fadeTime: 0.25
+  _shadowColor: {r: 0.6431373, g: 0.47058824, b: 0.33333334, a: 0.6}

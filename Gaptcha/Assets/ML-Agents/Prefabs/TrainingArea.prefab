@@ -367,12 +367,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92c30f71d5554ef7a33ecf9c6428e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetCameras:
-  - {fileID: 4228163536780594033}
-  - {fileID: 660950394671427896}
-  _tiltAngle: 20
-  _halfPhase: 2
-  _rotSpeed: 10
 --- !u!1 &937280896545401069
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +523,7 @@ MonoBehaviour:
   dodgeManager: {fileID: 225639822680945501}
   bulletPrefab: {fileID: 35339286359010767, guid: 4f20c14c48c5e1f408501098d875f61b, type: 3}
   bulletParent: {fileID: 5233094053256280238}
+  _shadowDebuff: {fileID: 4360830619924986929}
 --- !u!1 &1662655481212363114
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,6 +2012,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7598767654838934067, guid: a3b7e1b60dd195946aae17b0443cf0af, type: 3}
+      propertyPath: _debuff
+      value: 
+      objectReference: {fileID: 4360830619924986929}
     m_RemovedComponents:
     - {fileID: 2678906019157338303, guid: a3b7e1b60dd195946aae17b0443cf0af, type: 3}
     - {fileID: 4465510227698275294, guid: a3b7e1b60dd195946aae17b0443cf0af, type: 3}
@@ -2158,6 +2157,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5945793660349237838, guid: 78dfbc938315ed14abc438c44ba5b593, type: 3}
+      propertyPath: _debuff
+      value: 
+      objectReference: {fileID: 4360830619924986929}
     - target: {fileID: 6264624673891269878, guid: 78dfbc938315ed14abc438c44ba5b593, type: 3}
       propertyPath: m_Name
       value: PlayerImage
@@ -2225,6 +2228,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5945793660349237838, guid: 78dfbc938315ed14abc438c44ba5b593, type: 3}
+      propertyPath: _debuff
+      value: 
+      objectReference: {fileID: 4360830619924986929}
+    - target: {fileID: 5945793660349237838, guid: 78dfbc938315ed14abc438c44ba5b593, type: 3}
+      propertyPath: _sprite
+      value: 
+      objectReference: {fileID: 6497781609280974409}
+    - target: {fileID: 5945793660349237838, guid: 78dfbc938315ed14abc438c44ba5b593, type: 3}
+      propertyPath: _shadowColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945793660349237838, guid: 78dfbc938315ed14abc438c44ba5b593, type: 3}
+      propertyPath: _shadowColor.g
+      value: 0.6392157
+      objectReference: {fileID: 0}
+    - target: {fileID: 5945793660349237838, guid: 78dfbc938315ed14abc438c44ba5b593, type: 3}
+      propertyPath: _shadowColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6264624673891269878, guid: 78dfbc938315ed14abc438c44ba5b593, type: 3}
       propertyPath: m_Name
       value: PlayerImage
@@ -2264,6 +2287,10 @@ PrefabInstance:
       propertyPath: poopPrefab
       value: 
       objectReference: {fileID: 4529016941819920977, guid: 66bd1c10eb1b07348bbd1251a4a3c963, type: 3}
+    - target: {fileID: 28702985882517423, guid: 04ad2b7aa985fc3469bb050615ff6a22, type: 3}
+      propertyPath: _shadowDebuff
+      value: 
+      objectReference: {fileID: 4360830619924986929}
     - target: {fileID: 3953203768976571166, guid: 04ad2b7aa985fc3469bb050615ff6a22, type: 3}
       propertyPath: m_Name
       value: PoopSpawner

@@ -7,6 +7,8 @@ public class BulletManager : UpdateBehaviour
 
     [SerializeField] Bullet bulletPrefab;
     [SerializeField] Transform bulletParent;
+    
+    [SerializeField] AfterImageDebuff _shadowDebuff;
 
     float elapsedTime;
     float delayTime;
@@ -62,6 +64,7 @@ public class BulletManager : UpdateBehaviour
 
             Bullet bullet = Instantiate(bulletPrefab, bulletParent);
             bullet.Init(createPosition, dodgeManager.GetPlayerTransform());
+            bullet.GetComponentInChildren<AfterImageGenerator>().SetDebuff(_shadowDebuff);
         }
         makeCount += 1;
     }
