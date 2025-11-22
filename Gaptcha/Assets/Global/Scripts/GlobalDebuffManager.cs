@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,35 +17,37 @@ public class GlobalDebuffManager : UpdateBehaviour
         }
     }
 
-    public void Refresh()
-    {
-        foreach (DebuffManager dm in debuffManagerList) {
-            if (dm != null) { dm.OnDebuffExit(); }
-        }
-
-        nowDebuffManager = null;
-    }
-
     public void ChangeDebuff(bool allowSame = false)
     {
         if (debuffManagerList.Count <= 0)
             return;
 
-        int randIndex = UnityEngine.Random.Range(0, debuffManagerList.Count);
+        int count = debuffManagerList.Count;
+        int randIndex;
 
-        if (allowSame == false)
+        if (nowDebuffManager != null)
         {
-            if (debuffManagerList[randIndex] == nowDebuffManager)
-            {
-                ChangeDebuff(allowSame);
-                return;
-            }
+            nowDebuffManager.OnDebuffExit();
         }
 
-        if (nowDebuffManager != null) { nowDebuffManager.OnDebuffExit(); }
-        nowDebuffManager = debuffManagerList[randIndex];
-        nowDebuffManager.OnDebuffEnter();
 
+        if (!allowSame && count > 1)
+        {
+            do
+            {
+                randIndex = UnityEngine.Random.Range(0, count);
+            }
+            while (debuffManagerList[randIndex] == nowDebuffManager);
+        }
+        else
+        {
+
+            randIndex = UnityEngine.Random.Range(0, count);
+        }
+
+        nowDebuffManager = debuffManagerList[randIndex];
+
+        nowDebuffManager.OnDebuffEnter();
     }
 
 }
