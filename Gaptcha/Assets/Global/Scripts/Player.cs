@@ -50,7 +50,7 @@ public class Player : UpdateBehaviour
         movePosX = 0;
         movePosY = 0;
 
-        if (globalGameManager.actionIndex == GlobalDatas.ConvertInputValueToIndex(InputValue.SPACE))
+        if(globalGameManager.actionIndex == GlobalDatas.ConvertInputValueToIndex(InputValue.SPACE))
         {
             if (spaceElapsedTime <= 0)
             {
@@ -93,16 +93,4 @@ public class Player : UpdateBehaviour
         p.y = Mathf.Clamp(p.y, minBound.y + halfH, maxBound.y - halfH);
         transform.localPosition = p;
     }
-
-    public float GetSpeed()
-    {
-        return speed;
-    }
-
-    public void SetSpeed(float value)
-    {
-        Debug.Log("PLAYER SPEED CHANGED TO " + value);
-        speed = value;
-    }
-
 }
