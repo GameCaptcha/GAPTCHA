@@ -12,7 +12,7 @@ public class PoopAvoidPlayer : Player
     }
 
 
-    override protected void InputUpdate()
+    override public void InputUpdate()
     {
         base.InputUpdate();
 
@@ -28,7 +28,7 @@ public class PoopAvoidPlayer : Player
         Vector3 dir = new Vector3(movePosX, 0f, 0f).normalized;
 
         transform.localPosition += dir * speed * Time.fixedDeltaTime;
-         
+
         CheckPlayableBound();
     }
 

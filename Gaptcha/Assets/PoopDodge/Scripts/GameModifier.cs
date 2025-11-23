@@ -1,4 +1,3 @@
-using Unity.MLAgents;
 using UnityEngine;
 
 public class GameModifier : UpdateBehaviour

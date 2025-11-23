@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletManager : UpdateBehaviour
@@ -7,7 +6,7 @@ public class BulletManager : UpdateBehaviour
 
     [SerializeField] Bullet bulletPrefab;
     [SerializeField] Transform bulletParent;
-    
+
     [SerializeField] AfterImageDebuff _shadowDebuff;
 
     float elapsedTime;
@@ -36,7 +35,7 @@ public class BulletManager : UpdateBehaviour
         base.FUpdate();
         elapsedTime += Time.fixedDeltaTime;
 
-        if (elapsedTime >= delayTime) 
+        if (elapsedTime >= delayTime)
         {
             MakeBullet();
             elapsedTime -= delayTime;
@@ -45,7 +44,7 @@ public class BulletManager : UpdateBehaviour
 
     void MakeBullet()
     {
-        for (int i = 0; i < makeCount; ++i) 
+        for (int i = 0; i < makeCount; ++i)
         {
             Vector2 createPosition = new Vector2();
             int rand1 = Random.Range(0, 2);

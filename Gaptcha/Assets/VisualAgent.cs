@@ -1,18 +1,17 @@
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using UnityEngine;
 using Unity.MLAgents;
-using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
+using UnityEngine;
 
 public class VisualAgent : Agent
 {
     [SerializeField] GlobalGameManager globalGameManager;
 
     bool episodeEnd = false;
-    
+
     Rigidbody rBody;
-    void Start () {
+    void Start()
+    {
         rBody = GetComponent<Rigidbody>();
     }
 
@@ -21,7 +20,7 @@ public class VisualAgent : Agent
         GlobalDatas.DebugLog("Agent.OnEpisodeBegin()");
         globalGameManager.PerformOnEpisodeBegin();
     }
-    
+
     public override void CollectObservations(VectorSensor sensor)
     {
         GlobalDatas.DebugLog("Agent.CollectObservations()");
@@ -46,7 +45,7 @@ public class VisualAgent : Agent
     {
         GlobalDatas.DebugLog("Agent.OnActionReceived(): called");
         bool endEpisodeFlag = false;
-        
+
         var discreteActions = actionBuffers.DiscreteActions;
         if (true)
         {
@@ -78,13 +77,13 @@ public class VisualAgent : Agent
         // Because EndEpisode() call OnEpisodeBegin() immediately.
         GlobalDatas.DebugLog("Agent.OnActionReceived(): end");
     }
-    
+
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         GlobalDatas.DebugLog("Agent.Heuristic()");
         // var continuousActionsOut = actionsOut.ContinuousActions;
         var discreteActionsOut = actionsOut.DiscreteActions;
-        
+
         int inputValue = InputValue.NONE;
 
         if (Input.GetKey(KeyCode.LeftArrow))
@@ -103,7 +102,7 @@ public class VisualAgent : Agent
         {
             inputValue *= InputValue.DOWN;
         }
-        if (Input.GetKey(KeyCode.Space)) 
+        if (Input.GetKey(KeyCode.Space))
         {
             inputValue = InputValue.SPACE;
         }

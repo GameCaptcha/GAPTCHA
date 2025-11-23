@@ -4,6 +4,7 @@ public class Player : UpdateBehaviour
 {
     [SerializeField] protected GlobalGameManager globalGameManager;
     [SerializeField] protected SpriteRenderer spriteRender;
+    [SerializeField] GameKind myGameKind;
 
     protected float speed;
     protected Vector3 refreshPosition;
@@ -44,8 +45,11 @@ public class Player : UpdateBehaviour
         spaceElapsedTime -= Time.fixedDeltaTime;
     }
 
-    protected virtual void InputUpdate()
+    public virtual void InputUpdate()
     {
+        if (globalGameManager.GetNowGameKind() != myGameKind)
+            return;
+
         GlobalDatas.DebugLog("Player InputUpdate: actionIndex=" + globalGameManager.actionIndex);
         movePosX = 0;
         movePosY = 0;
@@ -93,4 +97,16 @@ public class Player : UpdateBehaviour
         p.y = Mathf.Clamp(p.y, minBound.y + halfH, maxBound.y - halfH);
         transform.localPosition = p;
     }
+
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public void SetSpeed(float value)
+    {
+        Debug.Log("PLAYER SPEED CHANGED TO " + value);
+        speed = value;
+    }
+
 }

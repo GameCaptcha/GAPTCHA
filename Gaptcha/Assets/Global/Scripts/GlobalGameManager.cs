@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -121,11 +120,19 @@ public class GlobalGameManager : UpdateBehaviour
 
         if (nowGameManager)
         {
+            nowGameManager.GameOver();
+
+            var fb = nowGameManager as FlappyBirdManager;
+            if (fb != null)
+                fb.flappyUI.SetActive(false);
+
             nowGameManager.gameObject.SetActive(false);
         }
         nowGameManager = gameManagerList[selectedIndex];
+        
         nowGameManager.gameObject.SetActive(true);
         nowGameManager.Refresh();
+        nowGameManager.SetGameKind();
         GlobalDatas.DebugLog("GameChange(): nowGameManager=" + nowGameManager + ", index=" + selectedIndex);
     }
 

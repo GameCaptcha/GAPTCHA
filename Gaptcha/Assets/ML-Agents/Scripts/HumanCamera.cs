@@ -10,5 +10,5 @@ public class HumanCamera : UpdateBehaviour
         float y = 1.0f / 9;
 
         humanCamera.rect = new Rect(x * xindex, y * yindex, x, y);
-    }    
+    }
 }

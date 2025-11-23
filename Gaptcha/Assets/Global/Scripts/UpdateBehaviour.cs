@@ -4,7 +4,7 @@ public class UpdateBehaviour : MonoBehaviour
 {
     private void FixedUpdate()
     {
-        if(GlobalDatas.UPDATE_AI_CONTROL == false)
+        if (GlobalDatas.UPDATE_AI_CONTROL == false)
         {
             FUpdate();
         }

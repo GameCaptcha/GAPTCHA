@@ -8,7 +8,7 @@ public abstract class GameManager : UpdateBehaviour
     public abstract void Refresh();
     public abstract void GameOver();
 
-    protected abstract void SetGameKind();
+    public abstract void SetGameKind();
     public GameKind GetGameKind()
     {
         return gameKind;

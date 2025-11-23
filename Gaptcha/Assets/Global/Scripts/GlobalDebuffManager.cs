@@ -29,24 +29,44 @@ public class GlobalDebuffManager : UpdateBehaviour
 
     public void ChangeDebuff(bool allowSame = false)
     {
-        if (debuffManagerList.Count <= 0)
+       
+
+        if (debuffManagerList.Count == 0)
             return;
 
-        int randIndex = UnityEngine.Random.Range(0, debuffManagerList.Count);
+   
+        GlobalGameManager gm = FindObjectOfType<GlobalGameManager>();
+        GameKind nowKind = gm.GetNowGameKind();
 
-        if (allowSame == false)
+       
+        int idx = UnityEngine.Random.Range(0, debuffManagerList.Count);
+        DebuffManager candidate = debuffManagerList[idx];
+
+       
+        if (candidate is KeyDebuff && nowKind != GameKind.FlappyBird)
         {
-            if (debuffManagerList[randIndex] == nowDebuffManager)
-            {
-                ChangeDebuff(allowSame);
-                return;
-            }
+            //Debug.Log("KeyDebuff skipped (not FlappyBird). Keeping current debuff.");
+            return;
         }
 
-        if (nowDebuffManager != null) { nowDebuffManager.OnDebuffExit(); }
-        nowDebuffManager = debuffManagerList[randIndex];
-        nowDebuffManager.OnDebuffEnter();
+       
+        if (!allowSame && candidate == nowDebuffManager)
+        {
+           // Debug.Log("Same debuff selected. Keeping current debuff.");
+            return;
+        }
 
+       
+        if (nowDebuffManager != null)
+            nowDebuffManager.OnDebuffExit();
+
+  
+        nowDebuffManager = candidate;
+       // Debug.Log("CALLING " + nowDebuffManager);
+
+        nowDebuffManager.OnDebuffEnter();
     }
+
+
 
 }

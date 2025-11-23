@@ -10,7 +10,7 @@ public class PoopAvoidManager : GameManager
     float surviveTime;
     bool isGameOver;
 
-    protected override void SetGameKind()
+    public override void SetGameKind()
     {
         gameKind = GameKind.PoopAvoid;
     }
@@ -27,7 +27,7 @@ public class PoopAvoidManager : GameManager
     override protected void FUpdate()
     {
         base.FUpdate();
-        if (isGameOver) 
+        if (isGameOver)
             return;
 
         surviveTime += Time.deltaTime;
@@ -39,7 +39,7 @@ public class PoopAvoidManager : GameManager
 
     public override void GameOver()
     {
-        if (isGameOver) 
+        if (isGameOver)
             return;
 
         isGameOver = true;

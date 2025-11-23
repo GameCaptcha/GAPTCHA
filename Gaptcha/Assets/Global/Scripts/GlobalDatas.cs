@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -91,7 +90,7 @@ public class GlobalDatas
     {
         int index = 0;
 
-        for(int i = 0; i < InputValue.listInputCases.Count; ++i)
+        for (int i = 0; i < InputValue.listInputCases.Count; ++i)
         {
             if (inputValue == InputValue.listInputCases[i])
             {

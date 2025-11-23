@@ -1,14 +1,15 @@
-using System;
 using UnityEngine;
 
 public class FlappyBirdPlayer : Player
 {
-    private float _jumpPower = 4; // 점프 세기
+    private float _jumpPower = 4;
 
     private bool _isDie = false;
     private bool _jumpPressed;
-    
+
     [SerializeField] Rigidbody2D myRigidbody;
+    [SerializeField] KeyDebuff keyDebuff;
+
 
     protected override void Init()
     {
@@ -47,10 +48,43 @@ public class FlappyBirdPlayer : Player
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other) 
+    private void OnCollisionEnter2D(Collision2D other)
     {
         _isDie = true;
 
         globalGameManager.GameOver();
-    } 
+    }
+
+    public override void InputUpdate()
+    {
+        base.InputUpdate();
+
+    
+        if (keyDebuff != null && keyDebuff.IsActive)
+        {
+            int mapped = keyDebuff.MappedKey;
+            int currentValue = GlobalDatas.ConvertInputIndexeToValue(globalGameManager.actionIndex);
+
+            if (currentValue == mapped)
+            {
+               
+                globalGameManager.actionIndex =
+                    GlobalDatas.ConvertInputValueToIndex(InputValue.SPACE);
+            }
+
+            //Debug.Log($"[Flappy Input] current={currentValue}, mapped={mapped}");
+
+        }
+
+    }
+    public float GetJumpPower()
+    {
+        return _jumpPower;
+    }
+
+    public void SetJumpPower(float value)
+    {
+        _jumpPower = value;
+    }
+
 }
