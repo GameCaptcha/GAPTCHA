@@ -1120,6 +1120,7 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
   globalGameManager: {fileID: 7900124600360754099}
+  agentCameraSensorOn: {fileID: 4228163536780594033}
   forceMultiplier: 10
 --- !u!114 &3290352884494322231
 MonoBehaviour:

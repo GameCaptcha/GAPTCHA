@@ -11,9 +11,69 @@ public class VisualAgent : Agent
 
     bool episodeEnd = false;
     
+    [Tooltip("할당하면 카메라를 자동으로 켭니다. 하나의 환경을 크게 보기 위해서 사용합니다.")]
+    [SerializeField] Camera agentCameraSensorOn;
+    
     Rigidbody rBody;
-    void Start () {
+    // A single 'visual' agent instance that owns the camera sensor
+    public static VisualAgent MainVisualAgent { get; private set; }
+    // (No coroutine tracking field required) coroutines stop automatically on disable/destroy
+
+    void Awake()
+    {
+        if (MainVisualAgent == null)
+        {
+            MainVisualAgent = this;
+        }
+    }
+    void Start()
+    {
         rBody = GetComponent<Rigidbody>();
+        
+        if (this == MainVisualAgent)
+        {
+            // Only the main visual agent starts the coroutine to enable its camera sensor
+            if (agentCameraSensorOn)
+            {
+                StartCoroutine(EnableCameraSensorAfterDelay(0.1f));
+            }
+        }
+        
+    }
+
+    private System.Collections.IEnumerator EnableCameraSensorAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        // Ensure only the current main visual agent enables its camera (prevents race conditions)
+        if (this == MainVisualAgent && agentCameraSensorOn != null)
+        {
+            agentCameraSensorOn.enabled = true;
+            GlobalDatas.DebugLog("Agent.Start(): enabled agentCameraSensorOn");
+        }
+    }
+
+    // No OnDisable needed: coroutines started from this MonoBehaviour are stopped automatically
+
+    void OnDestroy()
+    {
+        if (MainVisualAgent == this)
+        {
+            MainVisualAgent = null;
+            // find another VisualAgent in scene and make it the main visual agent
+            var others = FindObjectsOfType<VisualAgent>();
+            foreach (var a in others)
+            {
+                if (a != this)
+                {
+                    MainVisualAgent = a;
+                    if (MainVisualAgent.agentCameraSensorOn)
+                    {
+                        MainVisualAgent.StartCoroutine(MainVisualAgent.EnableCameraSensorAfterDelay(0.1f));
+                    }
+                    break;
+                }
+            }
+        }
     }
 
     public override void OnEpisodeBegin()
