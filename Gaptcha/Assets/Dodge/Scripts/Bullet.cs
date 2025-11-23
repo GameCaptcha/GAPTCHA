@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Bullet : UpdateBehaviour
 {
+    [SerializeField] AfterImageGenerator afterImageGenerator;
 
     Vector3 targetPosition;
     float speed;
@@ -10,16 +12,21 @@ public class Bullet : UpdateBehaviour
     float elapsedTime;
     float destroyTime = 3.5f;
 
-    public void Init(Vector2 createPosition, Transform targetTransform)
+    Action<Bullet> restoreAction = null;
+
+    public void Init(Vector2 createPosition, Transform targetTransform, Action<Bullet> action, AfterImageDebuff afterImageDebuff)
     {
         elapsedTime = 0f;
         transform.localPosition = createPosition;
 
         targetPosition = targetTransform.localPosition;
 
+        afterImageGenerator.SetDebuff(afterImageDebuff);
         normalizedTargetVector = (targetPosition - transform.localPosition).normalized;
 
         speed = 5.0f;
+
+        restoreAction = action;
     }
 
     override protected void FUpdate()
@@ -29,7 +36,8 @@ public class Bullet : UpdateBehaviour
         elapsedTime += Time.fixedDeltaTime;
         if (elapsedTime >= destroyTime)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            restoreAction?.Invoke(this);
         }
     }
 }

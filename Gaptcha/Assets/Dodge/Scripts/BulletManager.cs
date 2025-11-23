@@ -5,7 +5,8 @@ public class BulletManager : UpdateBehaviour
 {
     [SerializeField] DodgeManager dodgeManager;
 
-    [SerializeField] Bullet bulletPrefab;
+    //[SerializeField] Bullet bulletPrefab;
+    [SerializeField] BulletFactory bulletFactory;
     [SerializeField] Transform bulletParent;
     
     [SerializeField] AfterImageDebuff _shadowDebuff;
@@ -25,10 +26,7 @@ public class BulletManager : UpdateBehaviour
 
     public void Refresh()
     {
-        foreach (Transform child in bulletParent)
-        {
-            Destroy(child.gameObject);
-        }
+        bulletFactory.Refresh();
     }
 
     override protected void FUpdate()
@@ -62,9 +60,9 @@ public class BulletManager : UpdateBehaviour
                 createPosition.y = rand2 * createSize;
             }
 
-            Bullet bullet = Instantiate(bulletPrefab, bulletParent);
-            bullet.Init(createPosition, dodgeManager.GetPlayerTransform());
-            bullet.GetComponentInChildren<AfterImageGenerator>().SetDebuff(_shadowDebuff);
+            Bullet bullet = bulletFactory.UseObject();
+            bullet.transform.parent = bulletParent;
+            bullet.Init(createPosition, dodgeManager.GetPlayerTransform(), bulletFactory.Restore, _shadowDebuff);
         }
         makeCount += 1;
     }

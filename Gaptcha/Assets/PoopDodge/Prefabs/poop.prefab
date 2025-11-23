@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e85a3f050482824bae3e462e6548070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallSpeed: 3
-  destroyY: -6
+  afterImageGenerator: {fileID: 2989521709974470741}
 --- !u!114 &2989521709974470741
 MonoBehaviour:
   m_ObjectHideFlags: 0

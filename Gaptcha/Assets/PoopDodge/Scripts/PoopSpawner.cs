@@ -3,9 +3,10 @@ using UnityEngine;
 public class PoopSpawner : UpdateBehaviour
 {
     [SerializeField] Transform poopParent;
+    [SerializeField] PoopFactory poopFactory;
     [SerializeField] private AfterImageDebuff _shadowDebuff;
     
-    public Poop poopPrefab;
+    //public Poop poopPrefab;
     public float spawnY = 6f;
     public Vector2 xRange = new Vector2(-5.0f, 5.0f);
     public float spawnInterval = 0.8f;
@@ -20,16 +21,13 @@ public class PoopSpawner : UpdateBehaviour
 
     public void Refresh()
     {
-        foreach (Transform child in poopParent)
-        {
-            Destroy(child.gameObject);
-        }
+        poopFactory.Refresh();
     }
 
     override protected void FUpdate()
     {
         base.FUpdate();
-        timer += Time.deltaTime;
+        timer += Time.fixedDeltaTime;
         if (timer >= spawnInterval)
         {
             timer = 0f;
@@ -41,13 +39,15 @@ public class PoopSpawner : UpdateBehaviour
     {
         float x = Random.Range(xRange.x, xRange.y);
         Vector3 pos = new Vector3(x, spawnY, 0f);
-        Poop go = Instantiate(poopPrefab, poopParent);
+        //Poop go = Instantiate(poopPrefab, poopParent);
+        Poop go = poopFactory.UseObject();
+        go.transform.parent = poopParent;
         go.transform.localPosition = pos;
         go.tag = "Poop";
 
-        if (go != null) {
-            go.fallSpeed = poopSpeed;
-            go.GetComponentInChildren<AfterImageGenerator>().SetDebuff(_shadowDebuff);
+        if (go != null) 
+        {
+            go.Init(poopSpeed, _shadowDebuff, poopFactory.Restore);
         }
     }
 }

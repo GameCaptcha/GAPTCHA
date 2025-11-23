@@ -3,7 +3,8 @@ using UnityEngine;
 public class PipeGenerator : UpdateBehaviour
 {
     [SerializeField] Transform pipeParent;
-    [SerializeField] GameObject pipe; // 파이프 프리팹
+    //[SerializeField] GameObject pipe; // 파이프 프리팹
+    [SerializeField] PipeFactory pipeFactory;
     const float coolDown = 1.5f; // 파이프 생성 쿨타임
     
     float _timer;
@@ -17,11 +18,7 @@ public class PipeGenerator : UpdateBehaviour
 
     void Refresh()
     {
-
-        foreach (Transform child in pipeParent)
-        {
-            Destroy(child.gameObject);
-        }
+        pipeFactory.Refresh();
     }
 
     override protected void FUpdate()
@@ -30,9 +27,11 @@ public class PipeGenerator : UpdateBehaviour
         _timer += Time.fixedDeltaTime;
         
         if (_timer >= coolDown) { 
-            GameObject newPipe = Instantiate(pipe, pipeParent);
+            //GameObject newPipe = Instantiate(pipe, pipeParent);
+            PipeMove newPipe = pipeFactory.UseObject();
+            newPipe.transform.parent = pipeParent;
             newPipe.transform.localPosition = new Vector3(6, Random.Range(-1.1f, 0.8f), 0);
-            Destroy(newPipe, 7.0f);
+            newPipe.Init(7.0f, pipeFactory.Restore);
             
             _timer -= coolDown;
         } // 쿨타임 돌 때마다 파이프 생성 & 5초 뒤 삭제
