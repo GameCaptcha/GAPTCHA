@@ -93,4 +93,14 @@ public class Player : UpdateBehaviour
         p.y = Mathf.Clamp(p.y, minBound.y + halfH, maxBound.y - halfH);
         transform.localPosition = p;
     }
+    public float GetSpeed()
+    {
+        return speed;
+    }
+
+    public void SetSpeed(float value)
+    {
+        Debug.Log("PLAYER SPEED CHANGED TO " + value);
+        speed = value;
+    }
 }
