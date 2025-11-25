@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Bullet : UpdateBehaviour
+public class Bullet : SpriteBehaviour
 {
     [SerializeField] AfterImageGenerator afterImageGenerator;
 

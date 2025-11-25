@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class GlobalGameManager : UpdateBehaviour
 {
-    [SerializeField] GlobalDebuffManager debuffManager;
+    [SerializeField] GlobalDebuffManager globalDebuffManager;
 
 
 
@@ -61,19 +61,21 @@ public class GlobalGameManager : UpdateBehaviour
         base.FUpdate();
 
         elapsedChangeTime += Time.fixedDeltaTime;
-        elapsedDebuffTime += Time.fixedDeltaTime;
+        //elapsedDebuffTime += Time.fixedDeltaTime;
 
         if (elapsedChangeTime >= gameChangeDelay)
         {
             elapsedChangeTime -= gameChangeDelay;
             GameChange();
+            globalDebuffManager.ChangeDebuff();
         }
 
-        if(elapsedDebuffTime >= gameChangeDelay)
-        {
-            elapsedDebuffTime -= gameChangeDelay;
-            debuffManager.ChangeDebuff();
-        }
+        //if(elapsedDebuffTime >= gameChangeDelay)
+        //{
+        //    elapsedDebuffTime -= gameChangeDelay;
+        //    globalDebuffManager.ChangeDebuff();
+        //}
+
     }
 
     public void GameChange(bool allowSame = false)
@@ -127,6 +129,7 @@ public class GlobalGameManager : UpdateBehaviour
         nowGameManager.gameObject.SetActive(true);
         nowGameManager.Refresh();
         GlobalDatas.DebugLog("GameChange(): nowGameManager=" + nowGameManager + ", index=" + selectedIndex);
+
     }
 
     void GameStart()
@@ -157,8 +160,8 @@ public class GlobalGameManager : UpdateBehaviour
             gameManagerList[i].GameOver();
         }
 
-        elapsedDebuffTime = -gameChangeDelay / 2f;
-        debuffManager.Refresh();
+        elapsedDebuffTime = -gameChangeDelay;
+        globalDebuffManager.Refresh();
         visualAgent.OnEndEpisode();
     }
 
@@ -179,7 +182,7 @@ public class GlobalGameManager : UpdateBehaviour
         // Init();
         if (nowGameManager)
         {
-            elapsedDebuffTime = -gameChangeDelay / 2f;
+            elapsedDebuffTime = -gameChangeDelay;
             nowGameManager.Refresh();
             elapsedChangeTime = 0.0f;
         }
@@ -188,5 +191,4 @@ public class GlobalGameManager : UpdateBehaviour
             GlobalDatas.DebugLogError("PerformOnEpisodeBegin(): not exist nowGameManager");
         }
     }
-
 }

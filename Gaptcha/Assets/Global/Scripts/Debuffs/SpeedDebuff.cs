@@ -16,7 +16,7 @@ public class SpeedDebuff : DebuffManager
 
     public override void OnDebuffEnter()
     {
-        Debug.Log("[DEBUG] SpeedDebuff ENTER");
+        GlobalDatas.DebugLog("[DEBUG] SpeedDebuff ENTER");
 
         if (isDebuffing)
             return;

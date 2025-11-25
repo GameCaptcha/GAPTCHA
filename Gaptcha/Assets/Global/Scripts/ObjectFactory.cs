@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectFactory<T> : MonoBehaviour where T: MonoBehaviour
+public class ObjectFactory<T> : MonoBehaviour where T: SpriteBehaviour
 {
+    [SerializeField] GlobalDebuffManager globalDebuffManager;
+
     [SerializeField] int poolingCount = 10;
     [SerializeField] T prefabObject;
 
@@ -45,6 +47,8 @@ public class ObjectFactory<T> : MonoBehaviour where T: MonoBehaviour
             T obj = Instantiate(prefabObject, transform);
             obj.gameObject.SetActive(false);
             poolingList.Add(obj);
+
+            globalDebuffManager.AddSpriteBehaviour(obj);
         }
     }
 

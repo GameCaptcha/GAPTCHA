@@ -8,6 +8,9 @@ public class GlobalDebuffManager : UpdateBehaviour
     [SerializeField] List<DebuffManager> debuffManagerList = new List<DebuffManager>();
     DebuffManager nowDebuffManager = null;
 
+    // Player and background is already inside here
+    [SerializeField] List<SpriteBehaviour> spriteBehaviourList = new List<SpriteBehaviour>();
+
     protected override void FUpdate()
     {
         base.FUpdate();
@@ -29,7 +32,7 @@ public class GlobalDebuffManager : UpdateBehaviour
 
     public void ChangeDebuff(bool allowSame = false)
     {
-        Debug.Log("GDM ChangeDebuff CALLED");
+        GlobalDatas.DebugLog("GDM ChangeDebuff CALLED");
 
         if (debuffManagerList.Count <= 0)
             return;
@@ -56,12 +59,22 @@ public class GlobalDebuffManager : UpdateBehaviour
         }
 
         nowDebuffManager = debuffManagerList[randIndex];
-        Debug.Log("CALLING " + nowDebuffManager);
+        GlobalDatas.DebugLog("CALLING " + nowDebuffManager);
+
+        ShaderDebuff shaderDebuff = nowDebuffManager as ShaderDebuff;
+        if (shaderDebuff != null)
+        {
+            shaderDebuff.Init(spriteBehaviourList);
+        }
 
         nowDebuffManager.OnDebuffEnter();
+
     }
 
-
+    public void AddSpriteBehaviour(SpriteBehaviour spriteBehaviour)
+    {
+        spriteBehaviourList.Add(spriteBehaviour);
+    }
 }
 
 

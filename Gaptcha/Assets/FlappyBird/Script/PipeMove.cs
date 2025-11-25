@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PipeMove : UpdateBehaviour
+public class PipeMove : SpriteBehaviour
 {
     
     [SerializeField] private float _movSpeed; // 파이프 이동속도

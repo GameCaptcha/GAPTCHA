@@ -151,6 +151,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5083b8f78ca9344dab95ade6031eca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRendererList:
+  - {fileID: 7717507980355819041}
   afterImageGenerator: {fileID: 3329785111891745931}
 --- !u!61 &-1590304328138251172
 BoxCollider2D:

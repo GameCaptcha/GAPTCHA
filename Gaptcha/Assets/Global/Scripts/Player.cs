@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Player : UpdateBehaviour
+public class Player : SpriteBehaviour
 {
     [SerializeField] protected GlobalGameManager globalGameManager;
     [SerializeField] protected SpriteRenderer spriteRender;

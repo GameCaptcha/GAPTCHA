@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Poop : UpdateBehaviour
+public class Poop : SpriteBehaviour
 {
     [SerializeField] AfterImageGenerator afterImageGenerator;
 
