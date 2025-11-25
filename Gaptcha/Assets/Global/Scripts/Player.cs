@@ -50,7 +50,7 @@ public class Player : SpriteBehaviour
         movePosX = 0;
         movePosY = 0;
 
-        if(globalGameManager.actionIndex == GlobalDatas.ConvertInputValueToIndex(InputValue.SPACE))
+        if(globalGameManager.actionIndex == globalGameManager.currentJumpActionIndex)
         {
             if (spaceElapsedTime <= 0)
             {

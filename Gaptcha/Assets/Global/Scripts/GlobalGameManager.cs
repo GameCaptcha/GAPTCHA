@@ -23,8 +23,12 @@ public class GlobalGameManager : UpdateBehaviour
 
     float elapsedDebuffTime = -8.0f;
 
+    public int currentJumpActionIndex;
+
     void Awake()
     {
+        currentJumpActionIndex = GlobalDatas.ConvertInputValueToIndex(InputValue.SPACE);
+
         if (gamesParent != null)
         {
             int childCount = gamesParent.transform.childCount;
@@ -55,6 +59,11 @@ public class GlobalGameManager : UpdateBehaviour
         GameChange();
     }
 
+    public void ResetJumpKey()
+    {
+        currentJumpActionIndex = GlobalDatas.ConvertInputValueToIndex(InputValue.SPACE);
+    }
+
 
     protected override void FUpdate()
     {
@@ -76,6 +85,11 @@ public class GlobalGameManager : UpdateBehaviour
         //    globalDebuffManager.ChangeDebuff();
         //}
 
+    }
+
+    public float GetElapsedChangeTime()
+    {
+        return elapsedChangeTime;
     }
 
     public void GameChange(bool allowSame = false)
