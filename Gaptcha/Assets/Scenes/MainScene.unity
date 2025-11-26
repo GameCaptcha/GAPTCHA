@@ -370,8 +370,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trainingAreaParent: {fileID: 1948711190}
   trainingAreaPrefab: {fileID: 7192392324758014814, guid: a8b0274a71ea2884e9faca8f151038a8, type: 3}
-  X_MAX: 1
-  Y_MAX: 1
+  X_MAX: 3
+  Y_MAX: 3
 --- !u!4 &1948711190
 Transform:
   m_ObjectHideFlags: 0
