@@ -100,7 +100,7 @@ public class Player : SpriteBehaviour
 
     public void SetSpeed(float value)
     {
-        Debug.Log("PLAYER SPEED CHANGED TO " + value);
+        GlobalDatas.DebugLog("PLAYER SPEED CHANGED TO " + value);
         speed = value;
     }
 }
