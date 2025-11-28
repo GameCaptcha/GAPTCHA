@@ -2,11 +2,23 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DEBUFF_ENUM
+{
+    NONE = 0,
+    KEY_DEBUFF,
+    AFTER_IMAGE,
+    CAMERA_ROTATE,
+    COLOR_REVERSAL,
+    SPEED_CHANGE,
+    MONO_COLOR,
+    MOSAIC_IMAGE
+}
 
 public class GlobalDebuffManager : UpdateBehaviour
 {
     [SerializeField] List<DebuffManager> debuffManagerList = new List<DebuffManager>();
     DebuffManager nowDebuffManager = null;
+    DEBUFF_ENUM nowDebuffIndex = DEBUFF_ENUM.NONE;
 
     // Player and background is already inside here
     [SerializeField] List<SpriteBehaviour> spriteBehaviourList = new List<SpriteBehaviour>();
@@ -57,6 +69,9 @@ public class GlobalDebuffManager : UpdateBehaviour
         {
             randIndex = UnityEngine.Random.Range(0, count);
         }
+        randIndex = 5;
+
+        nowDebuffIndex = (DEBUFF_ENUM)randIndex;
 
         nowDebuffManager = debuffManagerList[randIndex];
         GlobalDatas.DebugLog("CALLING " + nowDebuffManager);
@@ -74,6 +89,11 @@ public class GlobalDebuffManager : UpdateBehaviour
     public void AddSpriteBehaviour(SpriteBehaviour spriteBehaviour)
     {
         spriteBehaviourList.Add(spriteBehaviour);
+    }
+
+    public DEBUFF_ENUM GetNowDebuffEnum()
+    {
+        return nowDebuffIndex;
     }
 }
 
