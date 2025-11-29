@@ -79,7 +79,6 @@ public class VisualAgent : Agent
     public override void OnEpisodeBegin()
     {
         GlobalDatas.DebugLog(() => "Agent.OnEpisodeBegin()");
-        Debug.Log("Agent.OnEpisodeBegin()");
         globalGameManager.PerformOnEpisodeBegin();
     }
     
