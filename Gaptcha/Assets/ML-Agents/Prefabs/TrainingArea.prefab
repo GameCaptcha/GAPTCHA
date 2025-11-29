@@ -2069,13 +2069,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debuffManagerList:
-  - {fileID: 3315647304954131257}
+  - {fileID: 4391797950546595020}
   - {fileID: 4360830619924986929}
   - {fileID: 332963089686108851}
   - {fileID: 4049937068321982017}
-  - {fileID: 4391797950546595020}
-  - {fileID: 816274120543644281}
   - {fileID: 8162045935705171966}
+  - {fileID: 3315647304954131257}
+  - {fileID: 816274120543644281}
+  - {fileID: 4391797950546595020}
   spriteBehaviourList:
   - {fileID: 2856067591277122650}
   - {fileID: 7830799539178216933}
@@ -2389,8 +2390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9cd3a31c560f61499c5fe3c0a452a99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 4
-  speedMultiplier: 1.5
+  globalGameManager: {fileID: 7900124600360754099}
 --- !u!1 &8388639610980641125
 GameObject:
   m_ObjectHideFlags: 0

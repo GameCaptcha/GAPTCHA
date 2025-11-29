@@ -92,6 +92,11 @@ public class GlobalGameManager : UpdateBehaviour
         return elapsedChangeTime;
     }
 
+    public float GetGameChangeDelay()
+    {
+        return gameChangeDelay;
+    }
+
     public void GameChange(bool allowSame = false)
     {
         int count = gameManagerList.Count;

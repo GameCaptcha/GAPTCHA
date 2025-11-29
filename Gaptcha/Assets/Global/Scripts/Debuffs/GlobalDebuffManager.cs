@@ -69,7 +69,6 @@ public class GlobalDebuffManager : UpdateBehaviour
         {
             randIndex = UnityEngine.Random.Range(0, count);
         }
-        randIndex = 5;
 
         nowDebuffIndex = (DEBUFF_ENUM)randIndex;
 

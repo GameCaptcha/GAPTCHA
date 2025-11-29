@@ -6,7 +6,9 @@ public class Bullet : SpriteBehaviour
     [SerializeField] AfterImageGenerator afterImageGenerator;
 
     Vector3 targetPosition;
-    float speed;
+
+    float baseSpeed = 5.0f;
+    float currentSpeed;
     Vector2 normalizedTargetVector;
 
     float elapsedTime;
@@ -24,15 +26,20 @@ public class Bullet : SpriteBehaviour
         afterImageGenerator.SetDebuff(afterImageDebuff);
         normalizedTargetVector = (targetPosition - transform.localPosition).normalized;
 
-        speed = 5.0f;
+        currentSpeed = baseSpeed;
 
         restoreAction = action;
+    }
+
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        currentSpeed = baseSpeed * multiplier;
     }
 
     override protected void FUpdate()
     {
         base.FUpdate();
-        transform.localPosition += (Vector3)normalizedTargetVector * speed * Time.fixedDeltaTime;
+        transform.localPosition += (Vector3)normalizedTargetVector * currentSpeed * Time.fixedDeltaTime;
         elapsedTime += Time.fixedDeltaTime;
         if (elapsedTime >= destroyTime)
         {
