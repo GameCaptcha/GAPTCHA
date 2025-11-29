@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2346302928887187388, guid: 0647d03bb57c4f94783409076204647a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -103,8 +103,9 @@ MonoBehaviour:
   _debuff: {fileID: 0}
   _sprite: {fileID: 7717507980355819041}
   _coolDown: 0.1
-  _fadeTime: 0.2
+  _fadeTime: 2
   _shadowColor: {r: 0.11764706, g: 0, b: 1, a: 0.6}
+  parent: {fileID: 0}
 --- !u!1 &7056797266046013233
 GameObject:
   m_ObjectHideFlags: 0

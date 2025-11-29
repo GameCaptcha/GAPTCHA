@@ -103,8 +103,9 @@ MonoBehaviour:
   _debuff: {fileID: 0}
   _sprite: {fileID: 0}
   _coolDown: 0.15
-  _fadeTime: 0.2
+  _fadeTime: 2
   _shadowColor: {r: 1, g: 0.6392157, b: 0, a: 0.6}
+  parent: {fileID: 0}
 --- !u!1 &6264624673891269878
 GameObject:
   m_ObjectHideFlags: 0
