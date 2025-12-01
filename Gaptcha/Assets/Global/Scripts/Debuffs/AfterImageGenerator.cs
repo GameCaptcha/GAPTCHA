@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AfterImageGenerator : UpdateBehaviour
@@ -6,9 +7,11 @@ public class AfterImageGenerator : UpdateBehaviour
   [SerializeField] private AfterImageDebuff _debuff;
   [SerializeField] SpriteRenderer _sprite;
   [SerializeField] float _coolDown = 0.05f;
-  [SerializeField] float _fadeTime = 0.3f;
+  [SerializeField] float _fadeTime = 2f;
   [SerializeField] Color _shadowColor;
 
+  private List<GameObject> _afterImages = new List<GameObject>();
+  
   private float _timer;
   private bool _isActive;
 
@@ -43,6 +46,17 @@ public class AfterImageGenerator : UpdateBehaviour
   void OnDisable() {
     if (_debuff != null) {
       _debuff.OnImageDebuffToggle -= HandleDebuffToggle;
+    }
+
+    DestroyAfterImage();
+  }
+  
+  void DestroyAfterImage() {
+    
+    foreach (GameObject afterImage in _afterImages) {
+      if (afterImage != null) {
+        Destroy(afterImage);
+      }
     }
   }
   
@@ -80,22 +94,24 @@ public class AfterImageGenerator : UpdateBehaviour
   }
 
   void SpawnAfterImage() {
-    GameObject shadow = new GameObject("Afterimage");
-    Destroy(shadow.gameObject, _fadeTime);
-    shadow.transform.position = transform.position;
-    shadow.transform.rotation = transform.rotation;
-    shadow.transform.localScale = transform.localScale;
-
-    SpriteRenderer shadowSprite = shadow.AddComponent<SpriteRenderer>();
-    shadowSprite.sprite = _sprite.sprite;
-    shadowSprite.color = _shadowColor;
+    GameObject afterImage = new GameObject("Afterimage");
+    Destroy(afterImage.gameObject, _fadeTime);
+    _afterImages.Add(afterImage);
     
-    shadowSprite.flipX = _sprite.flipX;
-    shadowSprite.flipY = _sprite.flipY;
-    shadowSprite.sortingLayerID = _sprite.sortingLayerID;
-    shadowSprite.sortingOrder = _sprite.sortingOrder;
+    afterImage.transform.position = transform.position;
+    afterImage.transform.rotation = transform.rotation;
+    afterImage.transform.localScale = transform.localScale;
 
-    StartCoroutine(FadeEffect(shadowSprite));
+    SpriteRenderer afterImageSprite = afterImage.AddComponent<SpriteRenderer>();
+    afterImageSprite.sprite = _sprite.sprite;
+    afterImageSprite.color = _shadowColor;
+    
+    afterImageSprite.flipX = _sprite.flipX;
+    afterImageSprite.flipY = _sprite.flipY;
+    afterImageSprite.sortingLayerID = _sprite.sortingLayerID;
+    afterImageSprite.sortingOrder = _sprite.sortingOrder - 1;
+    
+    StartCoroutine(FadeEffect(afterImageSprite));
   }
 
   IEnumerator FadeEffect(SpriteRenderer shadow) {

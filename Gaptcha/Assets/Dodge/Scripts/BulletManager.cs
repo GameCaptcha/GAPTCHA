@@ -17,16 +17,31 @@ public class BulletManager : UpdateBehaviour
 
     float createSize = 6.5f;
 
+    private float currentObstacleMultiplier = 1.0f;
+
     public void Init()
     {
         elapsedTime = 0.0f;
         delayTime = 2.0f;
         makeCount = 6;
+        currentObstacleMultiplier = 1.0f;
     }
 
     public void Refresh()
     {
         bulletFactory.Refresh();
+        currentObstacleMultiplier = 1.0f;
+    }
+
+    public void SetObstacleSpeedMultiplier(float multiplier)
+    {
+        currentObstacleMultiplier = multiplier;
+
+        Bullet[] activeBullets = bulletParent.GetComponentsInChildren<Bullet>();
+        foreach (var bullet in activeBullets)
+        {
+            bullet.SetSpeedMultiplier(multiplier);
+        }
     }
 
     override protected void FUpdate()
@@ -63,6 +78,8 @@ public class BulletManager : UpdateBehaviour
             Bullet bullet = bulletFactory.UseObject();
             bullet.transform.parent = bulletParent;
             bullet.Init(createPosition, dodgeManager.GetPlayerTransform(), bulletFactory.Restore, _shadowDebuff);
+
+            bullet.SetSpeedMultiplier(currentObstacleMultiplier);
         }
         makeCount += 1;
     }

@@ -14,14 +14,30 @@ public class PoopSpawner : UpdateBehaviour
 
     float timer;
 
+    private float currentObstacleMultiplier = 1.0f;
+
+
     public void Init()
     {
         timer = 0.0f;
+        currentObstacleMultiplier = 1.0f;
     }
 
     public void Refresh()
     {
         poopFactory.Refresh();
+        currentObstacleMultiplier = 1.0f;
+    }
+
+    public void SetObstacleSpeedMultiplier(float multiplier)
+    {
+        currentObstacleMultiplier = multiplier;
+
+        Poop[] activePoops = poopParent.GetComponentsInChildren<Poop>();
+        foreach (var poop in activePoops)
+        {
+            poop.SetSpeedMultiplier(multiplier);
+        }
     }
 
     override protected void FUpdate()
@@ -48,6 +64,7 @@ public class PoopSpawner : UpdateBehaviour
         if (go != null) 
         {
             go.Init(poopSpeed, _shadowDebuff, poopFactory.Restore);
+            go.SetSpeedMultiplier(currentObstacleMultiplier);
         }
     }
 }
