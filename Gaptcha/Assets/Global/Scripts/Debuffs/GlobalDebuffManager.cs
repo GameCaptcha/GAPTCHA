@@ -74,6 +74,7 @@ public class GlobalDebuffManager : UpdateBehaviour
 
         nowDebuffManager = debuffManagerList[randIndex];
         GlobalDatas.DebugLog(() => "CALLING " + nowDebuffManager);
+        Debug.Log("CALLING " + nowDebuffManager);
 
         ShaderDebuff shaderDebuff = nowDebuffManager as ShaderDebuff;
         if (shaderDebuff != null)
