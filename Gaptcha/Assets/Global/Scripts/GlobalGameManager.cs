@@ -94,6 +94,15 @@ public class GlobalGameManager : UpdateBehaviour
 
     public void GameChange(bool allowSame = false)
     {
+        // 이전 게임에서 생존으로 전환되었음을 기록 (첫 게임이 아닌 경우)
+        if (nowGameManager != null && GameStatisticsCollector.Instance != null)
+        {
+            GameStatisticsCollector.Instance.RecordSurvive(
+                nowGameManager.GetGameKind(),
+                globalDebuffManager != null ? globalDebuffManager.GetCurrentDebuff() : null
+            );
+        }
+
         int count = gameManagerList.Count;
         if (count == 0)
         {
@@ -168,6 +177,15 @@ public class GlobalGameManager : UpdateBehaviour
     public void GameOver()
     {
         GlobalDatas.DebugLog(() => "GameOver()");
+
+        // 사망 통계 기록
+        if (nowGameManager != null && GameStatisticsCollector.Instance != null)
+        {
+            GameStatisticsCollector.Instance.RecordDeath(
+                nowGameManager.GetGameKind(),
+                globalDebuffManager != null ? globalDebuffManager.GetCurrentDebuff() : null
+            );
+        }
 
         for (int i = 0; i < gameManagerList.Count; ++i)
         {
