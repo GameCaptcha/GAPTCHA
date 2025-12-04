@@ -89,10 +89,17 @@ public class GlobalDebuffManager : UpdateBehaviour
     {
         spriteBehaviourList.Add(spriteBehaviour);
     }
-
     public DEBUFF_ENUM GetNowDebuffEnum()
     {
         return nowDebuffIndex;
+    }
+    
+    /// <summary>
+    /// 현재 활성화된 디버프 매니저를 반환합니다. 없으면 null입니다.
+    /// </summary>
+    public DebuffManager GetCurrentDebuff()
+    {
+        return nowDebuffManager;
     }
 }
 
