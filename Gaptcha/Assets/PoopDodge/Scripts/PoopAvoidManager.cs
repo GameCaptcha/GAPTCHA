@@ -10,6 +10,11 @@ public class PoopAvoidManager : GameManager
     float surviveTime;
     bool isGameOver;
 
+    void Awake()
+    {
+        SetGameKind();
+    }
+
     protected override void SetGameKind()
     {
         gameKind = GameKind.PoopAvoid;

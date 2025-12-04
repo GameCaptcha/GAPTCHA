@@ -4,6 +4,11 @@ public class DodgeManager : GameManager
 {
     [SerializeField] BulletManager bulletManager;
 
+    void Awake()
+    {
+        SetGameKind();
+    }
+
     protected override void SetGameKind()
     {
         gameKind = GameKind.Dodge;
