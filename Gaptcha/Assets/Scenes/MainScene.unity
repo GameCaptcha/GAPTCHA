@@ -248,8 +248,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exportPath: 
-  fileName: game_statistics_sandbox4_step49999977
-  autoSaveInterval: 60
+  fileName: game_statistics_sandbox4_human
+  autoSaveInterval: 1
   exportCSV: 1
   exportJSON: 1
 --- !u!1 &1832304822
